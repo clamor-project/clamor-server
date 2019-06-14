@@ -6,6 +6,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -18,16 +19,18 @@ public class Mute {
 	private int id;
 	
 	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-	private UserGroup listener;
+	@JoinColumn(name = "listener")
+	private Usergroup listener;
 	
 	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-	private UserGroup speaker;
+	@JoinColumn(name = "speaker")
+	private Usergroup speaker;
 
 	public Mute() {
 		super();
 	}
 
-	public Mute(int id, UserGroup listener, UserGroup speaker) {
+	public Mute(int id, Usergroup listener, Usergroup speaker) {
 		super();
 		this.id = id;
 		this.listener = listener;
@@ -42,19 +45,19 @@ public class Mute {
 		this.id = id;
 	}
 
-	UserGroup getListener() {
+	Usergroup getListener() {
 		return listener;
 	}
 
-	void setListener(UserGroup listener) {
+	void setListener(Usergroup listener) {
 		this.listener = listener;
 	}
 
-	UserGroup getSpeaker() {
+	Usergroup getSpeaker() {
 		return speaker;
 	}
 
-	void setSpeaker(UserGroup speaker) {
+	void setSpeaker(Usergroup speaker) {
 		this.speaker = speaker;
 	}
 

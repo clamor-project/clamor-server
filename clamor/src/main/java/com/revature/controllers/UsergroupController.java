@@ -8,29 +8,29 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.models.UserGroup;
-import com.revature.services.UserGroupService;
+import com.revature.models.Usergroup;
+import com.revature.services.UsergroupService;
 
 @RestController
 @RequestMapping("usergroup")
-public class UserGroupController {
+public class UsergroupController {
 
-	private UserGroupService userGroupService;
+	private UsergroupService usergroupService;
 
 	@Autowired
-	public UserGroupController(UserGroupService userGroupService) {
+	public UsergroupController(UsergroupService usergroupService) {
 		super();
-		this.userGroupService = userGroupService;
+		this.usergroupService = usergroupService;
 	}
 	
 	// this will probably not appear in the production application
 	@GetMapping
-	public List<UserGroup> findAll() {
-		return userGroupService.findAll();
+	public List<Usergroup> findAll() {
+		return usergroupService.findAll();
 	}
 	
 	@GetMapping("id/{id}")
-	public UserGroup findById(@PathVariable int id) {
-		return userGroupService.findById(id);
+	public Usergroup findById(@PathVariable int id) {
+		return usergroupService.findById(id);
 	}
 }

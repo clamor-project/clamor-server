@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -22,7 +23,8 @@ public class GroupMessage {
 	private int id;
 	
 	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-	private UserGroup author;
+	@JoinColumn(name = "author", referencedColumnName = "id")
+	private Usergroup author;
 	
 	@Column(name = "date_created", columnDefinition = "default now()")
 	private Date dateCreated;
@@ -34,7 +36,7 @@ public class GroupMessage {
 		super();
 	}
 
-	public GroupMessage(int id, UserGroup author, Date dateCreated, @NotNull String content) {
+	public GroupMessage(int id, Usergroup author, Date dateCreated, @NotNull String content) {
 		super();
 		this.id = id;
 		this.author = author;
@@ -50,11 +52,11 @@ public class GroupMessage {
 		this.id = id;
 	}
 
-	UserGroup getAuthor() {
+	Usergroup getAuthor() {
 		return author;
 	}
 
-	void setAuthor(UserGroup author) {
+	void setAuthor(Usergroup author) {
 		this.author = author;
 	}
 

@@ -15,31 +15,32 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "user_group")
-public class UserGroup {
+public class Usergroup {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
 	
 	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-	@JoinColumn(name = "group_id")
+	@JoinColumn(name = "group_id", referencedColumnName = "id")
 	private Group group;
 	
 	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	@JoinColumn(name = "role", referencedColumnName = "id")
 	private Role role;
 	
 	@Column(name = "joined_date")
 	private Date joinedDate = new Date();
 
-	public UserGroup() {
+	public Usergroup() {
 		super();
 	}
 
-	public UserGroup(int id, User user, Group group, Role role, Date joinedDate) {
+	public Usergroup(int id, User user, Group group, Role role, Date joinedDate) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -114,7 +115,7 @@ public class UserGroup {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UserGroup other = (UserGroup) obj;
+		Usergroup other = (Usergroup) obj;
 		if (group == null) {
 			if (other.group != null)
 				return false;

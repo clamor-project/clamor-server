@@ -24,9 +24,10 @@ public class Event {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "creator")
-	private UserGroup creator;
+	private Usergroup creator;
 	
 	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	@JoinColumn(name = "group_id")
 	private Group groupId;
 	
 	@NotNull
@@ -46,7 +47,7 @@ public class Event {
 		super();
 	}
 
-	public Event(int id, UserGroup creator, Group groupId, @NotNull String description, Date datePosted,
+	public Event(int id, Usergroup creator, Group groupId, @NotNull String description, Date datePosted,
 			@NotNull Date dateOf, boolean live) {
 		super();
 		this.id = id;
@@ -66,11 +67,11 @@ public class Event {
 		this.id = id;
 	}
 
-	public UserGroup getCreator() {
+	public Usergroup getCreator() {
 		return creator;
 	}
 
-	public void setCreator(UserGroup creator) {
+	public void setCreator(Usergroup creator) {
 		this.creator = creator;
 	}
 
