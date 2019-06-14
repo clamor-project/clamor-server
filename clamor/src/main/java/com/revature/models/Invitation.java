@@ -36,27 +36,27 @@ public class Invitation {
 		this.subject = subject;
 	}
 
-	int getId() {
+	public int getId() {
 		return id;
 	}
 
-	void setId(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	Usergroup getHost() {
+	public Usergroup getHost() {
 		return host;
 	}
 
-	void setHost(Usergroup host) {
+	public void setHost(Usergroup host) {
 		this.host = host;
 	}
 
-	User getSubject() {
+	public User getSubject() {
 		return subject;
 	}
 
-	void setSubject(User subject) {
+	public void setSubject(User subject) {
 		this.subject = subject;
 	}
 
@@ -98,4 +98,6 @@ public class Invitation {
 			return false;
 		return true;
 	}
+
+
 }

@@ -33,66 +33,12 @@ public class Usergroup {
 	@JoinColumn(name = "role", referencedColumnName = "id")
 	private Role role;
 	
-	@Column(name = "joined_date")
-	private Date joinedDate = new Date();
+	@Column(name = "joined_date", columnDefinition = "default now()")
+	private Date joinedDate;
 
 	public Usergroup() {
 		super();
-	}
-
-	public Usergroup(int id, User user, Group group, Role role, Date joinedDate) {
-		super();
-		this.id = id;
-		this.user = user;
-		this.group = group;
-		this.role = role;
-		this.joinedDate = joinedDate;
-	}
-
-	int getId() {
-		return id;
-	}
-
-	void setId(int id) {
-		this.id = id;
-	}
-
-	User getUser() {
-		return user;
-	}
-
-	void setUser(User user) {
-		this.user = user;
-	}
-
-	Group getGroup() {
-		return group;
-	}
-
-	void setGroup(Group group) {
-		this.group = group;
-	}
-
-	Role getRole() {
-		return role;
-	}
-
-	void setRole(Role role) {
-		this.role = role;
-	}
-
-	Date getJoinedDate() {
-		return joinedDate;
-	}
-
-	void setJoinedDate(Date joinedDate) {
-		this.joinedDate = joinedDate;
-	}
-
-	@Override
-	public String toString() {
-		return "UserGroup [id=" + id + ", user=" + user + ", group=" + group + ", role=" + role + ", joinedDate="
-				+ joinedDate + "]";
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -140,4 +86,60 @@ public class Usergroup {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Usergroup [id=" + id + ", user=" + user + ", group=" + group + ", role=" + role + ", joinedDate="
+				+ joinedDate + "]";
+	}
+
+	public Usergroup(int id, User user, Group group, Role role, Date joinedDate) {
+		super();
+		this.id = id;
+		this.user = user;
+		this.group = group;
+		this.role = role;
+		this.joinedDate = joinedDate;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Group getGroup() {
+		return group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public Date getJoinedDate() {
+		return joinedDate;
+	}
+
+	public void setJoinedDate(Date joinedDate) {
+		this.joinedDate = joinedDate;
+	}
+
 }

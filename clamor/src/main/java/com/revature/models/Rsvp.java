@@ -37,27 +37,27 @@ public class Rsvp {
 		this.event = event;
 	}
 
-	int getId() {
+	public int getId() {
 		return id;
 	}
 
-	void setId(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	Usergroup getAttendee() {
+	public Usergroup getAttendee() {
 		return attendee;
 	}
 
-	void setAttendee(Usergroup attendee) {
+	public void setAttendee(Usergroup attendee) {
 		this.attendee = attendee;
 	}
 
-	Event getEvent() {
+	public Event getEvent() {
 		return event;
 	}
 
-	void setEvent(Event event) {
+	public void setEvent(Event event) {
 		this.event = event;
 	}
 
@@ -99,4 +99,5 @@ public class Rsvp {
 			return false;
 		return true;
 	}
+
 }

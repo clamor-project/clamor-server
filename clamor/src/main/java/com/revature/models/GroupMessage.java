@@ -44,35 +44,35 @@ public class GroupMessage {
 		this.content = content;
 	}
 
-	int getId() {
+	public int getId() {
 		return id;
 	}
 
-	void setId(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	Usergroup getAuthor() {
+	public Usergroup getAuthor() {
 		return author;
 	}
 
-	void setAuthor(Usergroup author) {
+	public void setAuthor(Usergroup author) {
 		this.author = author;
 	}
 
-	Date getDateCreated() {
+	public Date getDateCreated() {
 		return dateCreated;
 	}
 
-	void setDateCreated(Date dateCreated) {
+	public void setDateCreated(Date dateCreated) {
 		this.dateCreated = dateCreated;
 	}
 
-	String getContent() {
+	public String getContent() {
 		return content;
 	}
 
-	void setContent(String content) {
+	public void setContent(String content) {
 		this.content = content;
 	}
 
@@ -121,4 +121,6 @@ public class GroupMessage {
 			return false;
 		return true;
 	}
+
+	
 }
