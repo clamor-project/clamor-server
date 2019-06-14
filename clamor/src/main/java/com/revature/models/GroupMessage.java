@@ -21,7 +21,7 @@ public class GroupMessage {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	private UserGroup author;
 	
 	@Column(name = "date_created", columnDefinition = "default now()")
