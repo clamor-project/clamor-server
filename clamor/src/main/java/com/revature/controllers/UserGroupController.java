@@ -23,6 +23,7 @@ public class UserGroupController {
 		this.userGroupService = userGroupService;
 	}
 	
+	// this will probably not appear in the production application
 	@GetMapping
 	public List<UserGroup> findAll() {
 		return userGroupService.findAll();

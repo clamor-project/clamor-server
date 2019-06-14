@@ -2,8 +2,8 @@ package com.revature.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.revature.models.GroupMessage;
+import com.revature.models.Event;
 
-public interface EventDao extends JpaRepository<GroupMessage, Integer> {
+public interface EventDao extends JpaRepository<Event, Integer> {
 
 }
