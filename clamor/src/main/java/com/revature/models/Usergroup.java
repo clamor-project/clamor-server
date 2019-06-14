@@ -15,83 +15,30 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "user_group")
-public class UserGroup {
+public class Usergroup {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
 	
 	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-	@JoinColumn(name = "group_id")
+	@JoinColumn(name = "group_id", referencedColumnName = "id")
 	private Group group;
 	
 	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	@JoinColumn(name = "role", referencedColumnName = "id")
 	private Role role;
 	
-	@Column(name = "joined_date")
-	private Date joinedDate = new Date();
+	@Column(name = "joined_date", columnDefinition = "default now()")
+	private Date joinedDate;
 
-	public UserGroup() {
+	public Usergroup() {
 		super();
-	}
-
-	public UserGroup(int id, User user, Group group, Role role, Date joinedDate) {
-		super();
-		this.id = id;
-		this.user = user;
-		this.group = group;
-		this.role = role;
-		this.joinedDate = joinedDate;
-	}
-
-	int getId() {
-		return id;
-	}
-
-	void setId(int id) {
-		this.id = id;
-	}
-
-	User getUser() {
-		return user;
-	}
-
-	void setUser(User user) {
-		this.user = user;
-	}
-
-	Group getGroup() {
-		return group;
-	}
-
-	void setGroup(Group group) {
-		this.group = group;
-	}
-
-	Role getRole() {
-		return role;
-	}
-
-	void setRole(Role role) {
-		this.role = role;
-	}
-
-	Date getJoinedDate() {
-		return joinedDate;
-	}
-
-	void setJoinedDate(Date joinedDate) {
-		this.joinedDate = joinedDate;
-	}
-
-	@Override
-	public String toString() {
-		return "UserGroup [id=" + id + ", user=" + user + ", group=" + group + ", role=" + role + ", joinedDate="
-				+ joinedDate + "]";
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -114,7 +61,7 @@ public class UserGroup {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UserGroup other = (UserGroup) obj;
+		Usergroup other = (Usergroup) obj;
 		if (group == null) {
 			if (other.group != null)
 				return false;
@@ -139,4 +86,60 @@ public class UserGroup {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Usergroup [id=" + id + ", user=" + user + ", group=" + group + ", role=" + role + ", joinedDate="
+				+ joinedDate + "]";
+	}
+
+	public Usergroup(int id, User user, Group group, Role role, Date joinedDate) {
+		super();
+		this.id = id;
+		this.user = user;
+		this.group = group;
+		this.role = role;
+		this.joinedDate = joinedDate;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Group getGroup() {
+		return group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public Date getJoinedDate() {
+		return joinedDate;
+	}
+
+	public void setJoinedDate(Date joinedDate) {
+		this.joinedDate = joinedDate;
+	}
+
 }

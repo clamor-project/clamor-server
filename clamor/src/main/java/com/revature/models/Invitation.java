@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -17,43 +18,45 @@ public class Invitation {
 	private int id;
 	
 	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-	private UserGroup host;
+	@JoinColumn(name = "host")
+	private Usergroup host;
 	
 	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	@JoinColumn(name = "subject")
 	private User subject;
 
 	public Invitation() {
 		super();
 	}
 
-	public Invitation(int id, UserGroup host, User subject) {
+	public Invitation(int id, Usergroup host, User subject) {
 		super();
 		this.id = id;
 		this.host = host;
 		this.subject = subject;
 	}
 
-	int getId() {
+	public int getId() {
 		return id;
 	}
 
-	void setId(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	UserGroup getHost() {
+	public Usergroup getHost() {
 		return host;
 	}
 
-	void setHost(UserGroup host) {
+	public void setHost(Usergroup host) {
 		this.host = host;
 	}
 
-	User getSubject() {
+	public User getSubject() {
 		return subject;
 	}
 
-	void setSubject(User subject) {
+	public void setSubject(User subject) {
 		this.subject = subject;
 	}
 
@@ -95,4 +98,6 @@ public class Invitation {
 			return false;
 		return true;
 	}
+
+
 }

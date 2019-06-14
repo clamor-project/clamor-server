@@ -1,12 +1,12 @@
 set schema 'clamor';
 
-insert into "user" (username, "password", email)
-values ('johndoe', 'pass', 'jd@jd.com'), ('jacqueliny', 'pass', 'jm@jm.com'),
-('everlyn', 'pass', 'en@en.com'), ('kamrano', 'pass', 'ko@ko.com'),
-('demileightf', 'pass', 'df@df.com'), ('akeelg', 'pass', 'ag@ag.com'),
-('unah', 'pass', 'uh@uh.com'), ('raidenm', 'pass', 'rm@rm.com'),
-('reof', 'pass', 'rf@rf.com'), ('elenab', 'pass', 'eb@eb.com'),
-('sida', 'pass', 'sa@sa.com'), ('kyrond', 'pass', 'kd@kd.com');
+insert into "user" (username, "password", email, date_of_birth)
+values ('johndoe', 'pass', 'jd@jd.com', '2000-01-01'), ('jacqueliny', 'pass', 'jm@jm.com', '2000-01-01'),
+('everlyn', 'pass', 'en@en.com', '2000-01-01'), ('kamrano', 'pass', 'ko@ko.com', '2000-01-01'),
+('demileightf', 'pass', 'df@df.com', '2000-01-01'), ('akeelg', 'pass', 'ag@ag.com', '2000-01-01'),
+('unah', 'pass', 'uh@uh.com', '2000-01-01'), ('raidenm', 'pass', 'rm@rm.com', '2000-01-01'),
+('reof', 'pass', 'rf@rf.com', '2000-01-01'), ('elenab', 'pass', 'eb@eb.com', '2000-01-01'),
+('sida', 'pass', 'sa@sa.com', '2000-01-01'), ('kyrond', 'pass', 'kd@kd.com', '2000-01-01');
 
 insert into "group" ("name", description)
 values ('Competative Tic-Tac-Toe','The host for the most competative, intense tic-tac-toe matches this world has ever seen!'),

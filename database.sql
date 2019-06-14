@@ -19,6 +19,7 @@ create table "user"(
 	username text unique not null,
 	"password" text not null,
 	"email" text unique not null,
+	date_of_birth date not null,
 	is_admin boolean default false
 );
 
@@ -54,7 +55,7 @@ create table group_message(
 
 create table "event"(
 	id serial primary key,
-	creator int references user_group on delete no action,
+	creator int references user_group on delete set null,
 	group_id int references "group" on delete cascade,
 	description text not null,
 	date_posted date default now(),

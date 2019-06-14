@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -22,7 +23,8 @@ public class GroupMessage {
 	private int id;
 	
 	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-	private UserGroup author;
+	@JoinColumn(name = "author", referencedColumnName = "id")
+	private Usergroup author;
 	
 	@Column(name = "date_created", columnDefinition = "default now()")
 	private Date dateCreated;
@@ -34,7 +36,7 @@ public class GroupMessage {
 		super();
 	}
 
-	public GroupMessage(int id, UserGroup author, Date dateCreated, @NotNull String content) {
+	public GroupMessage(int id, Usergroup author, Date dateCreated, @NotNull String content) {
 		super();
 		this.id = id;
 		this.author = author;
@@ -42,35 +44,35 @@ public class GroupMessage {
 		this.content = content;
 	}
 
-	int getId() {
+	public int getId() {
 		return id;
 	}
 
-	void setId(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	UserGroup getAuthor() {
+	public Usergroup getAuthor() {
 		return author;
 	}
 
-	void setAuthor(UserGroup author) {
+	public void setAuthor(Usergroup author) {
 		this.author = author;
 	}
 
-	Date getDateCreated() {
+	public Date getDateCreated() {
 		return dateCreated;
 	}
 
-	void setDateCreated(Date dateCreated) {
+	public void setDateCreated(Date dateCreated) {
 		this.dateCreated = dateCreated;
 	}
 
-	String getContent() {
+	public String getContent() {
 		return content;
 	}
 
-	void setContent(String content) {
+	public void setContent(String content) {
 		this.content = content;
 	}
 
@@ -119,4 +121,6 @@ public class GroupMessage {
 			return false;
 		return true;
 	}
+
+	
 }

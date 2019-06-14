@@ -19,7 +19,8 @@ public class Rsvp {
 	private int id;
 	
 	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-	private UserGroup attendee;
+	@JoinColumn(name = "attendee")
+	private Usergroup attendee;
 	
 	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	@JoinColumn(name = "event_id")
@@ -29,34 +30,34 @@ public class Rsvp {
 		super();
 	}
 
-	public Rsvp(int id, UserGroup attendee, Event event) {
+	public Rsvp(int id, Usergroup attendee, Event event) {
 		super();
 		this.id = id;
 		this.attendee = attendee;
 		this.event = event;
 	}
 
-	int getId() {
+	public int getId() {
 		return id;
 	}
 
-	void setId(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	UserGroup getAttendee() {
+	public Usergroup getAttendee() {
 		return attendee;
 	}
 
-	void setAttendee(UserGroup attendee) {
+	public void setAttendee(Usergroup attendee) {
 		this.attendee = attendee;
 	}
 
-	Event getEvent() {
+	public Event getEvent() {
 		return event;
 	}
 
-	void setEvent(Event event) {
+	public void setEvent(Event event) {
 		this.event = event;
 	}
 
@@ -98,4 +99,5 @@ public class Rsvp {
 			return false;
 		return true;
 	}
+
 }
