@@ -20,7 +20,7 @@ public class DirectMessage {
 	private int id;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private int friends;
+	private Friending friends;
 	
 	private String content;
 	
@@ -31,7 +31,7 @@ public class DirectMessage {
 		super();
 	}
 
-	public DirectMessage(int id, int friends, String content, Date sentDate) {
+	public DirectMessage(int id, Friending friends, String content, Date sentDate) {
 		super();
 		this.id = id;
 		this.friends = friends;
@@ -47,11 +47,11 @@ public class DirectMessage {
 		this.id = id;
 	}
 
-	public int getFriends() {
+	public Friending getFriends() {
 		return friends;
 	}
 
-	public void setFriends(int friends) {
+	public void setFriends(Friending friends) {
 		this.friends = friends;
 	}
 
@@ -73,8 +73,7 @@ public class DirectMessage {
 
 	@Override
 	public String toString() {
-		return "DirectMessage [id=" + id + ", friends=" + friends + ", content=" + content + ", sentDate=" + sentDate
-				+ "]";
+		return "DirectMessage [id=" + id + ", content=" + content + ", sentDate=" + sentDate + "]";
 	}
 
 	@Override
@@ -82,7 +81,6 @@ public class DirectMessage {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
-		result = prime * result + friends;
 		result = prime * result + id;
 		result = prime * result + ((sentDate == null) ? 0 : sentDate.hashCode());
 		return result;
@@ -101,8 +99,6 @@ public class DirectMessage {
 			if (other.content != null)
 				return false;
 		} else if (!content.equals(other.content))
-			return false;
-		if (friends != other.friends)
 			return false;
 		if (id != other.id)
 			return false;

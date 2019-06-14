@@ -24,10 +24,10 @@ public class Event {
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "creator")
-	private int creator;
+	private UserGroup creator;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private int groupId;
+	private Group groupId;
 	
 	@NotNull
 	private String description;
@@ -44,7 +44,7 @@ public class Event {
 		super();
 	}
 
-	public Event(int id, int creator, int groupId, @NotNull String description, Date datePosted, Date dateOf,
+	public Event(int id, UserGroup creator, Group groupId, @NotNull String description, Date datePosted, Date dateOf,
 			boolean live) {
 		super();
 		this.id = id;
@@ -64,19 +64,19 @@ public class Event {
 		this.id = id;
 	}
 
-	public int getCreator() {
+	public UserGroup getCreator() {
 		return creator;
 	}
 
-	public void setCreator(int creator) {
+	public void setCreator(UserGroup creator) {
 		this.creator = creator;
 	}
 
-	public int getGroupId() {
+	public Group getGroupId() {
 		return groupId;
 	}
 
-	public void setGroupId(int groupId) {
+	public void setGroupId(Group groupId) {
 		this.groupId = groupId;
 	}
 
@@ -122,11 +122,11 @@ public class Event {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + creator;
+		result = prime * result + ((creator == null) ? 0 : creator.hashCode());
 		result = prime * result + ((dateOf == null) ? 0 : dateOf.hashCode());
 		result = prime * result + ((datePosted == null) ? 0 : datePosted.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + groupId;
+		result = prime * result + ((groupId == null) ? 0 : groupId.hashCode());
 		result = prime * result + id;
 		result = prime * result + (live ? 1231 : 1237);
 		return result;
@@ -141,7 +141,10 @@ public class Event {
 		if (getClass() != obj.getClass())
 			return false;
 		Event other = (Event) obj;
-		if (creator != other.creator)
+		if (creator == null) {
+			if (other.creator != null)
+				return false;
+		} else if (!creator.equals(other.creator))
 			return false;
 		if (dateOf == null) {
 			if (other.dateOf != null)
@@ -158,7 +161,10 @@ public class Event {
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
-		if (groupId != other.groupId)
+		if (groupId == null) {
+			if (other.groupId != null)
+				return false;
+		} else if (!groupId.equals(other.groupId))
 			return false;
 		if (id != other.id)
 			return false;

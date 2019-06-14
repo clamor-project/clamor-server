@@ -20,21 +20,21 @@ public class GroupTag {
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "group_id")
-	private int groupId;
+	private Group group;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "tag_id")
-	private int tagId;
+	private Tag tag;
 
 	public GroupTag() {
 		super();
 	}
 
-	public GroupTag(int id, int groupId, int tagId) {
+	public GroupTag(int id, Group group, Tag tag) {
 		super();
 		this.id = id;
-		this.groupId = groupId;
-		this.tagId = tagId;
+		this.group = group;
+		this.tag = tag;
 	}
 
 	public int getId() {
@@ -45,34 +45,34 @@ public class GroupTag {
 		this.id = id;
 	}
 
-	public int getGroupId() {
-		return groupId;
+	public Group getGroup() {
+		return group;
 	}
 
-	public void setGroupId(int groupId) {
-		this.groupId = groupId;
+	public void setGroup(Group group) {
+		this.group = group;
 	}
 
-	public int getTagId() {
-		return tagId;
+	public Tag getTag() {
+		return tag;
 	}
 
-	public void setTagId(int tagId) {
-		this.tagId = tagId;
+	public void setTag(Tag tag) {
+		this.tag = tag;
 	}
 
 	@Override
 	public String toString() {
-		return "GroupTag [id=" + id + ", groupId=" + groupId + ", tagId=" + tagId + "]";
+		return "GroupTag [id=" + id + ", group=" + group + ", tag=" + tag + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + groupId;
+		result = prime * result + ((group == null) ? 0 : group.hashCode());
 		result = prime * result + id;
-		result = prime * result + tagId;
+		result = prime * result + ((tag == null) ? 0 : tag.hashCode());
 		return result;
 	}
 
@@ -85,11 +85,17 @@ public class GroupTag {
 		if (getClass() != obj.getClass())
 			return false;
 		GroupTag other = (GroupTag) obj;
-		if (groupId != other.groupId)
+		if (group == null) {
+			if (other.group != null)
+				return false;
+		} else if (!group.equals(other.group))
 			return false;
 		if (id != other.id)
 			return false;
-		if (tagId != other.tagId)
+		if (tag == null) {
+			if (other.tag != null)
+				return false;
+		} else if (!tag.equals(other.tag))
 			return false;
 		return true;
 	}

@@ -18,16 +18,16 @@ public class Mute {
 	private int id;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private int listener;
+	private UserGroup listener;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private int speaker;
+	private UserGroup speaker;
 
 	public Mute() {
 		super();
 	}
 
-	public Mute(int id, int listener, int speaker) {
+	public Mute(int id, UserGroup listener, UserGroup speaker) {
 		super();
 		this.id = id;
 		this.listener = listener;
@@ -42,19 +42,19 @@ public class Mute {
 		this.id = id;
 	}
 
-	public int getListener() {
+	public UserGroup getListener() {
 		return listener;
 	}
 
-	public void setListener(int listener) {
+	public void setListener(UserGroup listener) {
 		this.listener = listener;
 	}
 
-	public int getSpeaker() {
+	public UserGroup getSpeaker() {
 		return speaker;
 	}
 
-	public void setSpeaker(int speaker) {
+	public void setSpeaker(UserGroup speaker) {
 		this.speaker = speaker;
 	}
 
@@ -68,8 +68,8 @@ public class Mute {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + id;
-		result = prime * result + listener;
-		result = prime * result + speaker;
+		result = prime * result + ((listener == null) ? 0 : listener.hashCode());
+		result = prime * result + ((speaker == null) ? 0 : speaker.hashCode());
 		return result;
 	}
 
@@ -84,9 +84,15 @@ public class Mute {
 		Mute other = (Mute) obj;
 		if (id != other.id)
 			return false;
-		if (listener != other.listener)
+		if (listener == null) {
+			if (other.listener != null)
+				return false;
+		} else if (!listener.equals(other.listener))
 			return false;
-		if (speaker != other.speaker)
+		if (speaker == null) {
+			if (other.speaker != null)
+				return false;
+		} else if (!speaker.equals(other.speaker))
 			return false;
 		return true;
 	}

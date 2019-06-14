@@ -20,17 +20,17 @@ public class Friending {
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_1")
-	private int user1;
+	private User user1;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_2")
-	private int user2;
+	private User user2;
 
 	public Friending() {
 		super();
 	}
 
-	public Friending(int id, int user1, int user2) {
+	public Friending(int id, User user1, User user2) {
 		super();
 		this.id = id;
 		this.user1 = user1;
@@ -45,19 +45,19 @@ public class Friending {
 		this.id = id;
 	}
 
-	public int getUser1() {
+	public User getUser1() {
 		return user1;
 	}
 
-	public void setUser1(int user1) {
+	public void setUser1(User user1) {
 		this.user1 = user1;
 	}
 
-	public int getUser2() {
+	public User getUser2() {
 		return user2;
 	}
 
-	public void setUser2(int user2) {
+	public void setUser2(User user2) {
 		this.user2 = user2;
 	}
 
@@ -71,8 +71,8 @@ public class Friending {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + id;
-		result = prime * result + user1;
-		result = prime * result + user2;
+		result = prime * result + ((user1 == null) ? 0 : user1.hashCode());
+		result = prime * result + ((user2 == null) ? 0 : user2.hashCode());
 		return result;
 	}
 
@@ -87,9 +87,15 @@ public class Friending {
 		Friending other = (Friending) obj;
 		if (id != other.id)
 			return false;
-		if (user1 != other.user1)
+		if (user1 == null) {
+			if (other.user1 != null)
+				return false;
+		} else if (!user1.equals(other.user1))
 			return false;
-		if (user2 != other.user2)
+		if (user2 == null) {
+			if (other.user2 != null)
+				return false;
+		} else if (!user2.equals(other.user2))
 			return false;
 		return true;
 	}

@@ -1,6 +1,8 @@
 package com.revature.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -14,17 +16,17 @@ public class Invitation {
 	@GeneratedValue
 	private int id;
 	
-	@ManyToOne
-	private int host;
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private UserGroup host;
 	
-	@ManyToOne
-	private int subject;
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private User subject;
 
 	public Invitation() {
 		super();
 	}
 
-	public Invitation(int id, int host, int subject) {
+	public Invitation(int id, UserGroup host, User subject) {
 		super();
 		this.id = id;
 		this.host = host;
@@ -39,19 +41,19 @@ public class Invitation {
 		this.id = id;
 	}
 
-	public int getHost() {
+	public UserGroup getHost() {
 		return host;
 	}
 
-	public void setHost(int host) {
+	public void setHost(UserGroup host) {
 		this.host = host;
 	}
 
-	public int getSubject() {
+	public User getSubject() {
 		return subject;
 	}
 
-	public void setSubject(int subject) {
+	public void setSubject(User subject) {
 		this.subject = subject;
 	}
 
@@ -64,9 +66,9 @@ public class Invitation {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + host;
+		result = prime * result + ((host == null) ? 0 : host.hashCode());
 		result = prime * result + id;
-		result = prime * result + subject;
+		result = prime * result + ((subject == null) ? 0 : subject.hashCode());
 		return result;
 	}
 
@@ -79,11 +81,17 @@ public class Invitation {
 		if (getClass() != obj.getClass())
 			return false;
 		Invitation other = (Invitation) obj;
-		if (host != other.host)
+		if (host == null) {
+			if (other.host != null)
+				return false;
+		} else if (!host.equals(other.host))
 			return false;
 		if (id != other.id)
 			return false;
-		if (subject != other.subject)
+		if (subject == null) {
+			if (other.subject != null)
+				return false;
+		} else if (!subject.equals(other.subject))
 			return false;
 		return true;
 	}

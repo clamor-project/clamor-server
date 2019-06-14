@@ -22,7 +22,7 @@ public class GroupMessage {
 	private int id;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private int author;
+	private UserGroup author;
 	
 	@Column(name = "date_created")
 	private Date dateCreated = new Date();
@@ -34,7 +34,7 @@ public class GroupMessage {
 		super();
 	}
 
-	public GroupMessage(int id, int author, Date dateCreated, String content) {
+	public GroupMessage(int id, UserGroup author, Date dateCreated, @NotNull String content) {
 		super();
 		this.id = id;
 		this.author = author;
@@ -50,11 +50,11 @@ public class GroupMessage {
 		this.id = id;
 	}
 
-	public int getAuthor() {
+	public UserGroup getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(int author) {
+	public void setAuthor(UserGroup author) {
 		this.author = author;
 	}
 
@@ -84,7 +84,7 @@ public class GroupMessage {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + author;
+		result = prime * result + ((author == null) ? 0 : author.hashCode());
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + ((dateCreated == null) ? 0 : dateCreated.hashCode());
 		result = prime * result + id;
@@ -100,7 +100,10 @@ public class GroupMessage {
 		if (getClass() != obj.getClass())
 			return false;
 		GroupMessage other = (GroupMessage) obj;
-		if (author != other.author)
+		if (author == null) {
+			if (other.author != null)
+				return false;
+		} else if (!author.equals(other.author))
 			return false;
 		if (content == null) {
 			if (other.content != null)

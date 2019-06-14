@@ -19,21 +19,21 @@ public class Rsvp {
 	private int id;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private int attendee;
+	private UserGroup attendee;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "event_id")
-	private int eventId;
+	private Event event;
 
 	public Rsvp() {
 		super();
 	}
 
-	public Rsvp(int id, int attendee, int eventId) {
+	public Rsvp(int id, UserGroup attendee, Event event) {
 		super();
 		this.id = id;
 		this.attendee = attendee;
-		this.eventId = eventId;
+		this.event = event;
 	}
 
 	public int getId() {
@@ -44,33 +44,33 @@ public class Rsvp {
 		this.id = id;
 	}
 
-	public int getAttendee() {
+	public UserGroup getAttendee() {
 		return attendee;
 	}
 
-	public void setAttendee(int attendee) {
+	public void setAttendee(UserGroup attendee) {
 		this.attendee = attendee;
 	}
 
-	public int getEventId() {
-		return eventId;
+	public Event getEvent() {
+		return event;
 	}
 
-	public void setEventId(int eventId) {
-		this.eventId = eventId;
+	public void setEvent(Event event) {
+		this.event = event;
 	}
 
 	@Override
 	public String toString() {
-		return "Rsvp [id=" + id + ", attendee=" + attendee + ", eventId=" + eventId + "]";
+		return "Rsvp [id=" + id + ", attendee=" + attendee + ", event=" + event + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + attendee;
-		result = prime * result + eventId;
+		result = prime * result + ((attendee == null) ? 0 : attendee.hashCode());
+		result = prime * result + ((event == null) ? 0 : event.hashCode());
 		result = prime * result + id;
 		return result;
 	}
@@ -84,9 +84,15 @@ public class Rsvp {
 		if (getClass() != obj.getClass())
 			return false;
 		Rsvp other = (Rsvp) obj;
-		if (attendee != other.attendee)
+		if (attendee == null) {
+			if (other.attendee != null)
+				return false;
+		} else if (!attendee.equals(other.attendee))
 			return false;
-		if (eventId != other.eventId)
+		if (event == null) {
+			if (other.event != null)
+				return false;
+		} else if (!event.equals(other.event))
 			return false;
 		if (id != other.id)
 			return false;

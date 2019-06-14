@@ -22,13 +22,14 @@ public class UserGroup {
 	private int id;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_id", referencedColumnName = "id")
-	private int userId;
+	@JoinColumn(name = "user_id", referencedColumnName = "")
+	private User user;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "group_id", referencedColumnName = "id")
-	private int groupId;
+	private Group group;
 	
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Role role;
 	
 	@Column(name = "joined_date")
@@ -38,11 +39,11 @@ public class UserGroup {
 		super();
 	}
 
-	public UserGroup(int id, int userId, int groupId, Role role, Date joinedDate) {
+	public UserGroup(int id, User user, Group group, Role role, Date joinedDate) {
 		super();
 		this.id = id;
-		this.userId = userId;
-		this.groupId = groupId;
+		this.user = user;
+		this.group = group;
 		this.role = role;
 		this.joinedDate = joinedDate;
 	}
@@ -55,20 +56,20 @@ public class UserGroup {
 		this.id = id;
 	}
 
-	public int getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public int getGroupId() {
-		return groupId;
+	public Group getGroup() {
+		return group;
 	}
 
-	public void setGroupId(int groupId) {
-		this.groupId = groupId;
+	public void setGroup(Group group) {
+		this.group = group;
 	}
 
 	public Role getRole() {
@@ -89,19 +90,19 @@ public class UserGroup {
 
 	@Override
 	public String toString() {
-		return "UserGroup [id=" + id + ", userId=" + userId + ", groupId=" + groupId + ", role=" + role
-				+ ", joinedDate=" + joinedDate + "]";
+		return "UserGroup [id=" + id + ", user=" + user + ", group=" + group + ", role=" + role + ", joinedDate="
+				+ joinedDate + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + groupId;
+		result = prime * result + ((group == null) ? 0 : group.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((joinedDate == null) ? 0 : joinedDate.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
-		result = prime * result + userId;
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -114,7 +115,10 @@ public class UserGroup {
 		if (getClass() != obj.getClass())
 			return false;
 		UserGroup other = (UserGroup) obj;
-		if (groupId != other.groupId)
+		if (group == null) {
+			if (other.group != null)
+				return false;
+		} else if (!group.equals(other.group))
 			return false;
 		if (id != other.id)
 			return false;
@@ -128,7 +132,10 @@ public class UserGroup {
 				return false;
 		} else if (!role.equals(other.role))
 			return false;
-		if (userId != other.userId)
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
 			return false;
 		return true;
 	}
