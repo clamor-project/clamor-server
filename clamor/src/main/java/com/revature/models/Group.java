@@ -19,16 +19,17 @@ public class Group {
 	@NotNull
 	private String name;
 	
+	@NotNull
 	private String description;
 	
-	@Column(name = "private")
-	private boolean isPrivate = false;
+	@Column(name = "private", columnDefinition = "default false")
+	private boolean isPrivate;
 
 	public Group() {
 		super();
 	}
 
-	public Group(int id, String name, String description, boolean isPrivate) {
+	public Group(int id, @NotNull String name, @NotNull String description, boolean isPrivate) {
 		super();
 		this.id = id;
 		this.name = name;

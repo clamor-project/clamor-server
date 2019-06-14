@@ -21,15 +21,15 @@ public class UserGroup {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_id", referencedColumnName = "")
+	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "group_id", referencedColumnName = "id")
+	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	@JoinColumn(name = "group_id")
 	private Group group;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	private Role role;
 	
 	@Column(name = "joined_date")
@@ -48,43 +48,43 @@ public class UserGroup {
 		this.joinedDate = joinedDate;
 	}
 
-	public int getId() {
+	int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	void setId(int id) {
 		this.id = id;
 	}
 
-	public User getUser() {
+	User getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	void setUser(User user) {
 		this.user = user;
 	}
 
-	public Group getGroup() {
+	Group getGroup() {
 		return group;
 	}
 
-	public void setGroup(Group group) {
+	void setGroup(Group group) {
 		this.group = group;
 	}
 
-	public Role getRole() {
+	Role getRole() {
 		return role;
 	}
 
-	public void setRole(Role role) {
+	void setRole(Role role) {
 		this.role = role;
 	}
 
-	public Date getJoinedDate() {
+	Date getJoinedDate() {
 		return joinedDate;
 	}
 
-	public void setJoinedDate(Date joinedDate) {
+	void setJoinedDate(Date joinedDate) {
 		this.joinedDate = joinedDate;
 	}
 

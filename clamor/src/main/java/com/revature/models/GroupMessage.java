@@ -24,8 +24,8 @@ public class GroupMessage {
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private UserGroup author;
 	
-	@Column(name = "date_created")
-	private Date dateCreated = new Date();
+	@Column(name = "date_created", columnDefinition = "default now()")
+	private Date dateCreated;
 	
 	@NotNull
 	private String content;
@@ -42,35 +42,35 @@ public class GroupMessage {
 		this.content = content;
 	}
 
-	public int getId() {
+	int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	void setId(int id) {
 		this.id = id;
 	}
 
-	public UserGroup getAuthor() {
+	UserGroup getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(UserGroup author) {
+	void setAuthor(UserGroup author) {
 		this.author = author;
 	}
 
-	public Date getDateCreated() {
+	Date getDateCreated() {
 		return dateCreated;
 	}
 
-	public void setDateCreated(Date dateCreated) {
+	void setDateCreated(Date dateCreated) {
 		this.dateCreated = dateCreated;
 	}
 
-	public String getContent() {
+	String getContent() {
 		return content;
 	}
 
-	public void setContent(String content) {
+	void setContent(String content) {
 		this.content = content;
 	}
 

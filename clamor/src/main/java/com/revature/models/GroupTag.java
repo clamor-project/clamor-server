@@ -18,11 +18,11 @@ public class GroupTag {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	@JoinColumn(name = "group_id")
 	private Group group;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	@JoinColumn(name = "tag_id")
 	private Tag tag;
 
@@ -37,27 +37,27 @@ public class GroupTag {
 		this.tag = tag;
 	}
 
-	public int getId() {
+	int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	void setId(int id) {
 		this.id = id;
 	}
 
-	public Group getGroup() {
+	Group getGroup() {
 		return group;
 	}
 
-	public void setGroup(Group group) {
+	void setGroup(Group group) {
 		this.group = group;
 	}
 
-	public Tag getTag() {
+	Tag getTag() {
 		return tag;
 	}
 
-	public void setTag(Tag tag) {
+	void setTag(Tag tag) {
 		this.tag = tag;
 	}
 

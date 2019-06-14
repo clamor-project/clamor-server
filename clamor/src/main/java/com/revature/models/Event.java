@@ -22,30 +22,32 @@ public class Event {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "creator")
 	private UserGroup creator;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	private Group groupId;
 	
 	@NotNull
 	private String description;
 
-	@Column(name = "date_posted")
+	@Column(name = "date_posted", columnDefinition="default now()")
 	private Date datePosted;
 	
 	@Column(name = "date_of")
+	@NotNull
 	private Date dateOf;
 	
-	private boolean live = true;
+	@Column(columnDefinition="default true")
+	private boolean live;
 
 	public Event() {
 		super();
 	}
 
-	public Event(int id, UserGroup creator, Group groupId, @NotNull String description, Date datePosted, Date dateOf,
-			boolean live) {
+	public Event(int id, UserGroup creator, Group groupId, @NotNull String description, Date datePosted,
+			@NotNull Date dateOf, boolean live) {
 		super();
 		this.id = id;
 		this.creator = creator;

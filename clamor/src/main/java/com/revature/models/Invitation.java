@@ -16,10 +16,10 @@ public class Invitation {
 	@GeneratedValue
 	private int id;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	private UserGroup host;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	private User subject;
 
 	public Invitation() {
@@ -33,27 +33,27 @@ public class Invitation {
 		this.subject = subject;
 	}
 
-	public int getId() {
+	int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	void setId(int id) {
 		this.id = id;
 	}
 
-	public UserGroup getHost() {
+	UserGroup getHost() {
 		return host;
 	}
 
-	public void setHost(UserGroup host) {
+	void setHost(UserGroup host) {
 		this.host = host;
 	}
 
-	public User getSubject() {
+	User getSubject() {
 		return subject;
 	}
 
-	public void setSubject(User subject) {
+	void setSubject(User subject) {
 		this.subject = subject;
 	}
 

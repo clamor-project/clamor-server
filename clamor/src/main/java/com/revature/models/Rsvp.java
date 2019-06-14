@@ -18,10 +18,10 @@ public class Rsvp {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	private UserGroup attendee;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	@JoinColumn(name = "event_id")
 	private Event event;
 
@@ -36,27 +36,27 @@ public class Rsvp {
 		this.event = event;
 	}
 
-	public int getId() {
+	int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	void setId(int id) {
 		this.id = id;
 	}
 
-	public UserGroup getAttendee() {
+	UserGroup getAttendee() {
 		return attendee;
 	}
 
-	public void setAttendee(UserGroup attendee) {
+	void setAttendee(UserGroup attendee) {
 		this.attendee = attendee;
 	}
 
-	public Event getEvent() {
+	Event getEvent() {
 		return event;
 	}
 
-	public void setEvent(Event event) {
+	void setEvent(Event event) {
 		this.event = event;
 	}
 

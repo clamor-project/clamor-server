@@ -7,21 +7,24 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "direct_message")
 public class DirectMessage {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	private Friending friends;
 	
+	@NotNull
 	private String content;
 	
 	@Column(name = "sent_date")
@@ -31,7 +34,7 @@ public class DirectMessage {
 		super();
 	}
 
-	public DirectMessage(int id, Friending friends, String content, Date sentDate) {
+	public DirectMessage(int id, Friending friends, @NotNull String content, Date sentDate) {
 		super();
 		this.id = id;
 		this.friends = friends;
@@ -73,7 +76,8 @@ public class DirectMessage {
 
 	@Override
 	public String toString() {
-		return "DirectMessage [id=" + id + ", content=" + content + ", sentDate=" + sentDate + "]";
+		return "DirectMessage [id=" + id + ", friends=" + friends + ", content=" + content + ", sentDate=" + sentDate
+				+ "]";
 	}
 
 	@Override
@@ -81,6 +85,7 @@ public class DirectMessage {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
+		result = prime * result + ((friends == null) ? 0 : friends.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((sentDate == null) ? 0 : sentDate.hashCode());
 		return result;
@@ -99,6 +104,11 @@ public class DirectMessage {
 			if (other.content != null)
 				return false;
 		} else if (!content.equals(other.content))
+			return false;
+		if (friends == null) {
+			if (other.friends != null)
+				return false;
+		} else if (!friends.equals(other.friends))
 			return false;
 		if (id != other.id)
 			return false;

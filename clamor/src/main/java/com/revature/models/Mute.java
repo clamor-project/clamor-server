@@ -17,10 +17,10 @@ public class Mute {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	private UserGroup listener;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	private UserGroup speaker;
 
 	public Mute() {
@@ -34,27 +34,27 @@ public class Mute {
 		this.speaker = speaker;
 	}
 
-	public int getId() {
+	int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	void setId(int id) {
 		this.id = id;
 	}
 
-	public UserGroup getListener() {
+	UserGroup getListener() {
 		return listener;
 	}
 
-	public void setListener(UserGroup listener) {
+	void setListener(UserGroup listener) {
 		this.listener = listener;
 	}
 
-	public UserGroup getSpeaker() {
+	UserGroup getSpeaker() {
 		return speaker;
 	}
 
-	public void setSpeaker(UserGroup speaker) {
+	void setSpeaker(UserGroup speaker) {
 		this.speaker = speaker;
 	}
 
