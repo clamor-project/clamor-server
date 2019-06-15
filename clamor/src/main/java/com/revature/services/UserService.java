@@ -6,5 +6,8 @@ import com.revature.models.User;
 
 public interface UserService {
 	List<User> findAll();
+	
 	User findById(int id);
+	
+	User getLogin(String username, String password);
 }

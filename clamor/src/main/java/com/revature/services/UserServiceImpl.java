@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +36,21 @@ public class UserServiceImpl implements UserService {
 		} else {
 			return null;
 		}
+	}
+
+	@Override
+	public User getLogin(String username, String password) {
+
+		List<User> userList = userDao.findByUsernameAndPassword(username, password);
+		User retUser;
+		
+		if (userList.size() == 1) {
+			retUser = userList.get(0);
+		} else {
+			retUser = new User(0, "", "", "", new Date(0));
+		}
+		
+		return retUser;
 	}
 
 }
