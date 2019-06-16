@@ -37,4 +37,34 @@ public class GroupServiceImpl implements GroupService {
 		}
 	}
 
+	@Override
+	public List<Group> findByName(String name) {
+
+		return groupDao.findByName(name);
+	}
+
+	@Override
+	public Group save(Group group) {
+		return groupDao.save(group);
+	}
+	
+	@Override
+	public List<Group> searchByName(String name) {
+		return groupDao.findByNameLikeIgnoreCase('%' + name + '%');
+	}
+	
+	@Override
+	public List<Group> searchByDescription(String description) {
+		return groupDao.findByDescriptionLikeIgnoreCase('%' + description + '%');
+	}
+	
+	@Override
+	public List<Group> searchByNameOrDescription(String query) {
+		return groupDao.findByNameLikeIgnoreCaseOrDescriptionLikeIgnoreCase('%' + query + '%',  '%' + query + '%');
+	}
+	
+	@Override
+	public void deleteById(int groupId) {
+		groupDao.deleteById(groupId);
+	}
 }

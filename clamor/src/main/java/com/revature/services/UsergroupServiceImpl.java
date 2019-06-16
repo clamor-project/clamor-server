@@ -22,13 +22,13 @@ public class UsergroupServiceImpl implements UsergroupService {
 
 	@Override
 	public List<Usergroup> findAll() {
-		// TODO Auto-generated method stub
+
 		return usergroupDao.findAll();
 	}
 
 	@Override
 	public Usergroup findById(int id) {
-		// TODO Auto-generated method stub
+
 		Optional<Usergroup> retVal = usergroupDao.findById(id);
 		if(retVal.isPresent()) {
 			return retVal.get();
@@ -37,4 +37,13 @@ public class UsergroupServiceImpl implements UsergroupService {
 		}
 	}
 
+	@Override
+	public Usergroup save(Usergroup usergroup) {
+		return usergroupDao.save(usergroup);
+	}
+	
+	@Override
+	public List<Usergroup> findByGroupId(int groupId) {
+		return usergroupDao.findByGroupId(groupId);
+	}
 }
