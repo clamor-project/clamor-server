@@ -9,18 +9,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.User;
+import com.revature.models.Usergroup;
 import com.revature.services.UserService;
+import com.revature.services.UsergroupService;
 
 @RestController
 @RequestMapping("user")
 public class UserController {
 
 	private UserService userService;
+	private UsergroupService usergroupService;
 
 	@Autowired
-	public UserController(UserService userService) {
+	public UserController(UserService userService, UsergroupService usergroupService) {
 		super();
 		this.userService = userService;
+		this.usergroupService = usergroupService;
 	}
 	
 	@GetMapping
@@ -31,5 +35,11 @@ public class UserController {
 	@GetMapping("id/{id}")
 	public User getById(@PathVariable int id) {
 		return userService.findById(id);
+	}
+	
+	// will eventually infer id based off of client data
+	@GetMapping("groups/{id}")
+	public List<Usergroup> findGroupsByUserId(@PathVariable int id){
+		return usergroupService.findByUserId(id);
 	}
 }
