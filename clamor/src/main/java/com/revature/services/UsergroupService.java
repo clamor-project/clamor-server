@@ -12,4 +12,6 @@ public interface UsergroupService {
 	Usergroup save(Usergroup usergroup);
 	
 	List<Usergroup> findByGroupId(int groupId);
+
+	List<Usergroup> findByUserId(int userId);
 }
