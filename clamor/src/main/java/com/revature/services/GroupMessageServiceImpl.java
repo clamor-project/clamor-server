@@ -37,4 +37,27 @@ public class GroupMessageServiceImpl implements GroupMessageService {
 		}
 	}
 
+	@Override
+	public GroupMessage save(GroupMessage groupMessage) {
+
+		return groupMessageDao.save(groupMessage);
+	}
+
+	@Override
+	public boolean deleteById(int id) {
+
+		try {
+			groupMessageDao.deleteById(id);
+		} catch(Exception e) {
+			System.out.println(e);
+			return false;
+		}
+		
+		return true;
+	}
+
+//	@Override
+//	public List<GroupMessage> findByGroupId(int id) {
+//		return groupMessageDao.findByGroupId(id);
+//	}
 }
