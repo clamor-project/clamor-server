@@ -6,5 +6,8 @@ import com.revature.models.Friending;
 
 public interface FriendingService {
 	List<Friending> findAll();
+	
 	Friending findById(int id);
+	
+	List<Friending> findUserFriends(int id);
 }
