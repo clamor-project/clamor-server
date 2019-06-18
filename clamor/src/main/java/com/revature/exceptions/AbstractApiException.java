@@ -18,6 +18,11 @@ public abstract class AbstractApiException extends RuntimeException {
 		this.message = message;
 	}
 
+	public AbstractApiException() {
+		super();
+		this.status = HttpStatus.INTERNAL_SERVER_ERROR;
+	}
+
 	public HttpStatus getStatus() {
 		return status;
 	}

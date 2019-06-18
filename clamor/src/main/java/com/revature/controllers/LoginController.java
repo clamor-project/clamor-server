@@ -29,7 +29,7 @@ public class LoginController {
 	public UserDTO login(@RequestBody User user) {
 		User retUser = userService.getLogin(user.getUsername(), user.getPassword());
 		if(retUser.getId() == 0) {
-			throw new IncorrectLoginException(HttpStatus.BAD_REQUEST, "your username or password is incorrect");
+			throw new IncorrectLoginException();
 		} else {
 			return Conversions.convertUserPrivate(retUser);
 		}
