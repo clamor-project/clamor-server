@@ -57,7 +57,8 @@ public class UserServiceImpl implements UserService {
 	public User getUser(String username) {
 		User retUser = userDao.findByUsername(username);
 		
-		if(retUser.equals(null)) { //dont think this works because how can it call a method of a null object
+		//so Can still make it temporarily a optional just to check if it exists
+		if(Optional.of(retUser).isPresent()) { 
 			return retUser;
 		} else {
 			return null;
