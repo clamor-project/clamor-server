@@ -6,12 +6,18 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.revature.exceptions.IncorrectLoginException;
+import com.revature.exceptions.ProtectedRouteException;
 
 @ControllerAdvice
 public class ApiExceptionHandler {
 
 	@ExceptionHandler(value= {IncorrectLoginException.class})
 	public ResponseEntity<Object> incorrectLogin(IncorrectLoginException e){
+		return new ResponseEntity<>(e.getMessage(), e.getStatus());
+	}
+	
+	@ExceptionHandler(value= {ProtectedRouteException.class})
+	public ResponseEntity<Object> protectedRoute(ProtectedRouteException e){
 		return new ResponseEntity<>(e.getMessage(), e.getStatus());
 	}
 
