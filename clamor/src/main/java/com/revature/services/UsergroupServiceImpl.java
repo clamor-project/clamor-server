@@ -56,4 +56,10 @@ public class UsergroupServiceImpl implements UsergroupService {
 
 		usergroupDao.joinGroup(userId, groupId, role);
 	}
+
+	@Override
+	public void updateUsergroupRole(int userId, int groupId, int role) {
+
+		usergroupDao.updateUsergroupRole(userId, groupId, role);
+	}
 }

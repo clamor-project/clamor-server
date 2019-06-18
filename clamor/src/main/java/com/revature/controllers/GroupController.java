@@ -155,6 +155,15 @@ public class GroupController {
 	// POST: New Usergroup
 	@PostMapping("/join/{groupId}")
 	public void joinGroup(@RequestBody User user, @PathVariable int groupId) {
+		
+		//TODO: logic for handling if they left and want to come back
 		usergroupService.joinGroup(user.getId(), groupId, 2);
+	}
+	
+	// PATCH: Update usergroup set role to "4"
+	// because nobody wanted them there anyway...
+	@PatchMapping("/leave/{groupId")
+	public void leaveGroup(@RequestBody User user, @PathVariable int groupId) {
+		usergroupService.updateUsergroupRole(user.getId(), groupId, 4);
 	}
 }
