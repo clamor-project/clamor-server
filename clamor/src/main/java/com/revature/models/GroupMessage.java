@@ -27,7 +27,7 @@ public class GroupMessage {
 	private Usergroup author;
 	
 	@Column(name = "date_created", columnDefinition = "default now()")
-	private Date dateCreated;
+	private Date dateCreated = new Date();
 	
 	@NotNull
 	private String content;
@@ -52,6 +52,7 @@ public class GroupMessage {
 		this.id = id;
 	}
 
+	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	public Usergroup getAuthor() {
 		return author;
 	}

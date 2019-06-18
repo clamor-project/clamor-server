@@ -50,4 +50,10 @@ public class UsergroupServiceImpl implements UsergroupService {
 	public List<Usergroup> findByUserId(int userId) {
 		return usergroupDao.findByUserId(userId);
 	}
+
+	@Override
+	public void joinGroup(int userId, int groupId, int role) {
+
+		usergroupDao.joinGroup(userId, groupId, role);
+	}
 }
