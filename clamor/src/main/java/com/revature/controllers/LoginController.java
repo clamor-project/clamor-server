@@ -1,5 +1,7 @@
 package com.revature.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,11 +28,12 @@ public class LoginController {
 	}
 	
 	@PostMapping(path = "", consumes = "application/json", produces = "application/json")
-	public UserDTO login(@RequestBody User user) {
+	public UserDTO login(@RequestBody User user, HttpServletRequest req) {
 		User retUser = userService.getLogin(user.getUsername(), user.getPassword());
 		if(retUser.getId() == 0) {
 			throw new IncorrectLoginException();
 		} else {
+			req.getSession().setAttribute("user", retUser);
 			return Conversions.convertUserPrivate(retUser);
 		}
 	}
