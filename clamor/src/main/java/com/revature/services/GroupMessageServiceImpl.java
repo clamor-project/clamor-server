@@ -56,8 +56,8 @@ public class GroupMessageServiceImpl implements GroupMessageService {
 		return true;
 	}
 
-//	@Override
-//	public List<GroupMessage> findByGroupId(int id) {
-//		return groupMessageDao.findByGroupId(id);
-//	}
+	@Override
+	public List<GroupMessage> findByGroupId(int id) {
+		return groupMessageDao.findByGroupId(id);
+	}
 }

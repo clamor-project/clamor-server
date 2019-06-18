@@ -1,9 +1,7 @@
 package com.revature.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.Group;
 import com.revature.models.GroupMessage;
+import com.revature.models.User;
 import com.revature.models.Usergroup;
 import com.revature.services.GroupMessageService;
 import com.revature.services.GroupService;
@@ -105,18 +104,56 @@ public class GroupController {
 	// PATCH: Existing Group or return blank if problems
 	@PatchMapping(path="", consumes = "application/json", produces="application/json")
 	public Group updateGroup(@RequestBody Group group) {
-		List<Group> canGroups = groupService.findByName(group.getName());
-
-		if (canGroups.size() == 0) {
-			return new Group(0, "", "", false);
-		}
 		
-		return groupService.save(group);
+		Group groupCheck = groupService.findById(group.getId());
+		if (groupCheck != null) {
+			return groupService.save(group);
+		} else {
+			return new Group(-1, "", "", false);
+		}
 	}
 	
 	// GET: All group messages from Group id {id}
-//	@GetMapping("/messages/id/{groupId}")
-//	public List<GroupMessage> getGroupMessages(int groupId) {
-//		return groupMessageService.findByGroupId(groupId);
-//	}
+	@GetMapping("/messages/{groupId}")
+	public List<GroupMessage> getGroupMessages(int groupId) {
+		return groupMessageService.findByGroupId(groupId);
+	}
+	
+	// POST: New GroupMessage
+	@PostMapping(path = "/messages", consumes = "application/json", produces="application/json")
+	public GroupMessage postGroupMessage(@RequestBody GroupMessage groupMessage) {
+
+		return groupMessageService.save(groupMessage);
+	}
+	
+	// PATCH: Existing GroupMessage
+	@PatchMapping(path = "/messages", consumes = "application/json", produces = "application/json")
+	public GroupMessage patchGroupMessage(@RequestBody GroupMessage groupMessage) {
+
+		GroupMessage groupMessageCheck = groupMessageService.findById(groupMessage.getId());
+		if (groupMessageCheck != null) {
+			return groupMessageService.save(groupMessage);
+		} else {
+			return new GroupMessage();
+		}
+	}
+	
+	// DELETE: Existing GroupMessage
+	@DeleteMapping("/messages/{id}")
+	public boolean deleteGroupMessage(@PathVariable int id) {
+		
+		try {
+			groupMessageService.deleteById(id);
+		} catch(Exception e) {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	// POST: New Usergroup
+	@PostMapping("/join/{groupId}")
+	public void joinGroup(@RequestBody User user, @PathVariable int groupId) {
+		usergroupService.joinGroup(user.getId(), groupId, 2);
+	}
 }
