@@ -1,9 +1,7 @@
 package com.revature.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -115,8 +113,9 @@ public class GroupController {
 	}
 	
 	// GET: All group messages from Group id {id}
-//	@GetMapping("/messages/id/{groupId}")
-//	public List<GroupMessage> getGroupMessages(int groupId) {
-//		return groupMessageService.findByGroupId(groupId);
-//	}
+	@GetMapping("/messages/{groupId}")
+	public List<GroupMessage> getGroupMessages(int groupId) {
+		return groupMessageService.findByGroupId(groupId);
+	}
+	
 }

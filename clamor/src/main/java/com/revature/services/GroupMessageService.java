@@ -14,5 +14,5 @@ public interface GroupMessageService {
 	
 	boolean deleteById(int id);
 	
-//	List<GroupMessage> findByGroupId(int id);
+	List<GroupMessage> findByGroupId(int id);
 }
