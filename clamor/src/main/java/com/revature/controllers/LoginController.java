@@ -33,7 +33,7 @@ public class LoginController {
 		if(retUser.getId() == 0) {
 			throw new IncorrectLoginException();
 		} else {
-			req.setAttribute("user", retUser);
+			req.getSession().setAttribute("user", retUser);
 			return Conversions.convertUserPrivate(retUser);
 		}
 	}

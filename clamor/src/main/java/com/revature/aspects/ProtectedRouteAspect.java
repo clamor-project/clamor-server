@@ -25,6 +25,9 @@ public class ProtectedRouteAspect {
 	@Around("@annotation(auth) && execution(* com.revature.controllers..*(..))")
 	public Object authenticateUser(ProceedingJoinPoint pjp, ProtectedRouteAnn auth) throws Throwable {
 		User currentUser = lg.getLoggedInUser();
+		if(currentUser == null) {
+			throw new ProtectedRouteException();
+		}
 		if(currentUser.getId() != 0) {
 			return pjp.proceed();
 		} else {

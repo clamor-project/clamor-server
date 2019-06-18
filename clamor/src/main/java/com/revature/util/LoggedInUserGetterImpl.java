@@ -11,13 +11,10 @@ import com.revature.models.User;
 @Component
 public class LoggedInUserGetterImpl implements LoggedInUserGetter {
 
-	@Override
 	public User getLoggedInUser() {
 		HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 		return (User) req.getSession().getAttribute("user");
 	}
-
-
 
 
 }
