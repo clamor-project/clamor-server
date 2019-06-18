@@ -12,4 +12,6 @@ public interface UserService {
 	User getLogin(String username, String password);
 	
 	User getUser(String username);
+	
+	List<User> getUserFriends(int user_id);
 }

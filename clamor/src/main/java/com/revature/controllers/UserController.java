@@ -35,13 +35,18 @@ public class UserController {
 		return userService.findById(id);
 	}
 	
+	@GetMapping("user/{id}")
+	public List<User> getUserFriends(@PathVariable int id){
+		return userService.getUserFriends(id);
+	}
+	
 	@PostMapping("")
 	public User getUsernameAndPassword(@RequestBody String username, @RequestBody String password) {
 		return userService.getLogin(username, password);
 		
 	}
 	
-	@PostMapping("")
+	@PostMapping("user")
 	public User getUsername(@RequestBody String username) {
 		return userService.getUser(username);
 	}

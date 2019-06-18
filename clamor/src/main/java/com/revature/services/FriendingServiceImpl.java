@@ -37,22 +37,4 @@ public class FriendingServiceImpl implements FriendingService {
 		}
 	}
 
-	@Override
-	public List<Friending> findUserFriends(int id) {
-		// TODO Auto-generated method stub
-		List<Friending> retList = friendingDao.findUserFriends(id);
-		
-		for(int x = 0; x < retList.size(); x++) {
-			if(Optional.of(retList.get(x)).isPresent()) {
-				
-			} else {
-				Friending temp = new Friending();
-				retList.remove(x);
-				retList.add(x, temp);
-			}
-		}
-		
-		return retList;
-	}
-
 }
