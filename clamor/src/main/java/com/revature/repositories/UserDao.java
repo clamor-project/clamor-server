@@ -1,7 +1,6 @@
 package com.revature.repositories;
 
 import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,6 +13,8 @@ import com.revature.models.User;
 public interface UserDao extends JpaRepository<User, Integer> {
 
 	public List<User> findByUsernameAndPassword(String username, String password);
+	
+	public List<User> findByUsernameOrEmail(String username, String email);
 	
 	public User findByUsername(String username);
 	

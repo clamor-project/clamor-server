@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.dtos.Conversions;
 import com.revature.dtos.UsergroupDTO;
+import com.revature.exceptions.IncorrectLoginException;
+import com.revature.exceptions.IncorrectRegistrationException;
 import com.revature.models.User;
 import com.revature.models.Usergroup;
 import com.revature.services.UserService;
@@ -62,5 +64,15 @@ public class UserController {
 	public List<UsergroupDTO> findGroupsByUserId(@PathVariable int id){
 		List<Usergroup> retList = usergroupService.findByUserId(id);
 		return Conversions.convertUsergroupPrivate(retList);
+	}
+	
+	@PostMapping(path="register", consumes = "application/json", produces = "application/json")
+	public User registerUser(@RequestBody User u){
+		User user = userService.save(u.getUsername(), u.getPassword(), u.getEmail(), u.getDateOfBirth());
+		if(user.getId() != 0) {
+			return user;
+		} else {
+			throw new IncorrectRegistrationException();
+		}
 	}
 }
