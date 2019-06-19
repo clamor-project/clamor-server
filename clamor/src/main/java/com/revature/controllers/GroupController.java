@@ -221,4 +221,16 @@ public class GroupController {
 		}
 		return eventService.save(event);
 	}
+	
+	// DELETE: event
+	@DeleteMapping("/event/{eventId}")
+	public boolean deleteEvent(@RequestBody User user, @PathVariable int eventId) {
+		
+		Event event = eventService.findById(eventId);
+		if (event.getCreator().getUser().getId() != user.getId()) {
+			return false;
+		}
+		
+		return eventService.deleteById(eventId);
+	}
 }

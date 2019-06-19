@@ -15,4 +15,6 @@ public interface EventService {
 	void createEvent(int usergroupId, int groupId, String description, Date datePosted, Date dateOf, boolean live);
 	
 	Event save(Event event);
+	
+	boolean deleteById(int id);
 }
