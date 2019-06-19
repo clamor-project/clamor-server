@@ -40,7 +40,7 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public List<Event> findByGroupId(int groupId) {
-		return eventDao.findByGroupId(groupId);
+		return eventDao.findByGroupIdId(groupId);
 	}
 
 	@Override

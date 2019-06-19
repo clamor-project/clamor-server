@@ -14,7 +14,7 @@ import com.revature.models.Event;
 
 public interface EventDao extends JpaRepository<Event, Integer> {
 
-	List<Event> findByGroupId(int groupId);
+	List<Event> findByGroupIdId(int groupId);
 	
 	@Modifying
 	@Query(value = "INSERT INTO clamor.event (creator, group_id, description, date_posted, date_of, live) VALUES (:usergroupId, :groupId, :description, :datePosted, :dateOf, :live)", nativeQuery = true)
