@@ -17,7 +17,7 @@ public interface EventDao extends JpaRepository<Event, Integer> {
 	List<Event> findByGroupId(int groupId);
 	
 	@Modifying
-	@Query(value = "INSERT INTO clamor.event (creator, group_id, description, date_posted, date_of, live) VALUES (:usergroupId, :groupId, :description, :datePosted, :dateOf, :live) RETURNING *;", nativeQuery = true)
+	@Query(value = "INSERT INTO clamor.event (creator, group_id, description, date_posted, date_of, live) VALUES (:usergroupId, :groupId, :description, :datePosted, :dateOf, :live)", nativeQuery = true)
 	@Transactional
-	Event createEvent(@Param("usergroupId") int usergroupId, @Param("groupId") int groupId, @Param("description") String description, @Param("datePosted") Date datePosted, @Param("dateOf") Date dateOf, @Param("live") boolean live);
+	void createEvent(@Param("usergroupId") int usergroupId, @Param("groupId") int groupId, @Param("description") String description, @Param("datePosted") Date datePosted, @Param("dateOf") Date dateOf, @Param("live") boolean live);
 }
