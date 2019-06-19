@@ -38,12 +38,12 @@ public class FriendingController {
 	}
 	
 	@PostMapping(path = "add", consumes = "application/json", produces = "application/json")
-	public void addFriends(@RequestBody int user_1, int user_2) {
+	public void addFriends(@RequestBody int user_1, @RequestBody int user_2) {
 		friendingService.addFriend(user_1, user_2);
 	}
 	
 	@DeleteMapping(path = "delete", consumes = "application/json", produces = "application/json")
-	public void deleteFriends(@RequestBody int user_1, int user_2) {
+	public void deleteFriends(@RequestBody int user_1, @RequestBody int user_2) {
 		friendingService.deleteFriend(user_1, user_2);
 	}
 	
