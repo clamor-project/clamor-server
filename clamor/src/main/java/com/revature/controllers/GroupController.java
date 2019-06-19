@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.annotations.ProtectedRouteAnn;
+import com.revature.models.Event;
 import com.revature.models.Group;
 import com.revature.models.GroupMessage;
 import com.revature.models.User;
 import com.revature.models.Usergroup;
+import com.revature.services.EventService;
 import com.revature.services.GroupMessageService;
 import com.revature.services.GroupService;
 import com.revature.services.UsergroupService;
@@ -28,16 +31,19 @@ public class GroupController {
 	private GroupService groupService;
 	private UsergroupService usergroupService;
 	private GroupMessageService groupMessageService;
+	private EventService eventService;
 
 	@Autowired
 	public GroupController(
 			GroupService groupService, 
 			UsergroupService usergroupService,
-			GroupMessageService groupMessageService) {
+			GroupMessageService groupMessageService,
+			EventService eventService) {
 		super();
 		this.groupService = groupService;
 		this.usergroupService = usergroupService;
 		this.groupMessageService = groupMessageService;
+		this.eventService = eventService;
 	}
 	
 	// GET: All Groups
@@ -154,7 +160,47 @@ public class GroupController {
 	
 	// POST: New Usergroup
 	@PostMapping("/join/{groupId}")
-	public void joinGroup(@RequestBody User user, @PathVariable int groupId) {
-		usergroupService.joinGroup(user.getId(), groupId, 2);
+	public boolean joinGroup(@RequestBody User user, @PathVariable int groupId) {
+		
+		List<Usergroup> ugl = usergroupService.findByUserIdAndGroupId(user.getId(), groupId);
+		if (ugl.size() == 0) {
+			usergroupService.joinGroup(user.getId(), groupId, 2);
+			return true;
+		} else {
+			Usergroup ug = ugl.get(0);
+			if (ug.getRole().getId() != 3) {
+				usergroupService.updateUsergroupRole(user.getId(), groupId, 2);
+				return true;
+			}
+		}
+		return false;
 	}
+	
+	// PATCH: Update usergroup set role to "4"
+	// because nobody wanted them there anyway...
+	@PatchMapping("/leave/{groupId}")
+	public void leaveGroup(@RequestBody User user, @PathVariable int groupId) {
+		usergroupService.updateUsergroupRole(user.getId(), groupId, 4);
+	}
+	
+	// GET: All events by Group ID
+	@GetMapping("/event/{groupId}")
+	public List<Event> findByGroupId(@PathVariable int groupId) {
+		return eventService.findByGroupId(groupId);
+	}
+	
+	// POST: New event
+	@PostMapping("/event/{groupId}")
+	public Event createEvent(@RequestBody Event event, @PathVariable int groupId) {
+		
+		Usergroup ug = (usergroupService.findByUserIdAndGroupId(event.getCreator().getId(), groupId)).get(0);
+		if (ug.getRole().getRoleName() == "member" || ug.getRole().getRoleName() == "admin") {
+			return eventService.createEvent(event.getCreator().getId(), groupId, event.getDescription(), event.getDatePosted(), event.getDateOf(), event.isLive());
+		}
+		
+		// returning an empty object as "false" with the falsiest falses of Javascript's falsy false values
+		return new Event(-1, null, null, "", null, null, false);
+	}
+	
+	
 }

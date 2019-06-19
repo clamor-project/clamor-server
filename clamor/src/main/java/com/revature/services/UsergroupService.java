@@ -15,5 +15,9 @@ public interface UsergroupService {
 
 	List<Usergroup> findByUserId(int userId);
 	
+	List<Usergroup> findByUserIdAndGroupId(int userId, int groupId);
+	
 	void joinGroup(int userId, int groupId, int role);
+	
+	void updateUsergroupRole(int userId, int groupId, int role);
 }

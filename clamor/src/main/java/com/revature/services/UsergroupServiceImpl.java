@@ -47,13 +47,25 @@ public class UsergroupServiceImpl implements UsergroupService {
 		return usergroupDao.findByGroupId(groupId);
 	}
 	
+	@Override
 	public List<Usergroup> findByUserId(int userId) {
 		return usergroupDao.findByUserId(userId);
+	}
+	
+	@Override
+	public List<Usergroup> findByUserIdAndGroupId(int userId, int groupId) {
+		return usergroupDao.findByUserIdAndGroupId(userId, groupId);
 	}
 
 	@Override
 	public void joinGroup(int userId, int groupId, int role) {
 
 		usergroupDao.joinGroup(userId, groupId, role);
+	}
+
+	@Override
+	public void updateUsergroupRole(int userId, int groupId, int role) {
+
+		usergroupDao.updateUsergroupRole(userId, groupId, role);
 	}
 }

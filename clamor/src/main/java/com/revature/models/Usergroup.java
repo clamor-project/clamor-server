@@ -34,7 +34,7 @@ public class Usergroup {
 	private Role role;
 	
 	@Column(name = "joined_date", columnDefinition = "default now()")
-	private Date joinedDate;
+	private Date joinedDate = new Date();
 
 	public Usergroup() {
 		super();
