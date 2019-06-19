@@ -13,7 +13,10 @@ public interface UserService {
 	User getLogin(String username, String password);
 	
 	User save(String username, String password, String email, Date dob);
+	
 	User getUser(String username);
 	
 	List<User> getUserFriends(int id);
+	
+	List<User> getFriendRequest(int id);
 }

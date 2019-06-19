@@ -48,6 +48,12 @@ public class UserController {
 		return userService.getUserFriends(id);
 	}
 	
+	@GetMapping("friends/request/{id}")
+	public List<User> getFriendRequest(@PathVariable int id){
+		return userService.getFriendRequest(id);
+	}
+	
+	
 	@PostMapping("")
 	public User getUsernameAndPassword(@RequestBody String username, @RequestBody String password) {
 		return userService.getLogin(username, password);
@@ -66,6 +72,7 @@ public class UserController {
 		return Conversions.convertUsergroupPrivate(retList);
 	}
 	
+
 	@PostMapping(path="register", consumes = "application/json", produces = "application/json")
 	public User registerUser(@RequestBody User u){
 		User user = userService.save(u.getUsername(), u.getPassword(), u.getEmail(), u.getDateOfBirth());
@@ -75,4 +82,6 @@ public class UserController {
 			throw new IncorrectRegistrationException();
 		}
 	}
+
 }
+

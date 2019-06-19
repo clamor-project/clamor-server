@@ -37,4 +37,14 @@ public class FriendingServiceImpl implements FriendingService {
 		}
 	}
 
+	@Override
+	public void addFriend(int user_1, int user_2) {
+		friendingDao.addFriend(user_1, user_2);
+	}
+
+	@Override
+	public void deleteFriend(int user_1, int user_2) {
+		friendingDao.deleteFriend(user_1, user_2);
+	}
+
 }
