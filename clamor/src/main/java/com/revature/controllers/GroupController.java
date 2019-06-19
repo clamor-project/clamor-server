@@ -178,7 +178,7 @@ public class GroupController {
 	
 	// PATCH: Update usergroup set role to "4"
 	// because nobody wanted them there anyway...
-	@PatchMapping("/leave/{groupId")
+	@PatchMapping("/leave/{groupId}")
 	public void leaveGroup(@RequestBody User user, @PathVariable int groupId) {
 		usergroupService.updateUsergroupRole(user.getId(), groupId, 4);
 	}
@@ -201,4 +201,6 @@ public class GroupController {
 		// returning an empty object as "false" with the falsiest falses of Javascript's falsy false values
 		return new Event(-1, null, null, "", null, null, false);
 	}
+	
+	
 }
