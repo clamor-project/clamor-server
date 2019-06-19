@@ -33,4 +33,5 @@ public class FriendingController {
 	public Friending findById(@PathVariable int id) {
 		return friendingService.findById(id);
 	}
+	
 }

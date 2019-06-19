@@ -43,6 +43,22 @@ public class UserController {
 		return userService.findById(id);
 	}
 	
+	@GetMapping("friends/{id}")
+	public List<User> getUserFriends(@PathVariable int id){
+		return userService.getUserFriends(id);
+	}
+	
+	@PostMapping("")
+	public User getUsernameAndPassword(@RequestBody String username, @RequestBody String password) {
+		return userService.getLogin(username, password);
+		
+	}
+	
+	@PostMapping("user")
+	public User getUsername(@RequestBody String username) {
+		return userService.getUser(username);
+  }
+
 	// will eventually infer id based off of client data
 	@GetMapping("groups/{id}")
 	public List<UsergroupDTO> findGroupsByUserId(@PathVariable int id){
