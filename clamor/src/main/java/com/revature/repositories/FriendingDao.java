@@ -13,13 +13,13 @@ public interface FriendingDao extends JpaRepository<Friending, Integer> {
 
 	//to add friends and accept friends
 	@Modifying
-	@Query(value = "INSERT INTO friending(user1, user2) VALUES ( :user_1, :user_2)", nativeQuery = true)
+	@Query(value = "INSERT INTO clamor.friending(user_1, user_2) VALUES ( :user_1, :user_2)", nativeQuery = true)
 	@Transactional
-	Friending addFriend(@Param("user_1") int user_1, @Param("user_2") int user_2);
+	void addFriend(@Param("user_1") int user_1, @Param("user_2") int user_2);
 		
 	//deleting friends
 	@Modifying
-	@Query(value = "DELETE FROM friending AS f WHERE (f.user1 = :user_1 AND f.user2 = :user_2) AND (f.user2 = :user_1 AND f.user1 = :user_2)", nativeQuery = true)
+	@Query(value = "DELETE FROM clamor.friending AS f WHERE (f.user_1 = :user_1 AND f.user_2 = :user_2) OR (f.user_2 = :user_1 AND f.user_1 = :user_2)", nativeQuery = true)
 	@Transactional
-	Friending deleteFriend(@Param("user_1") int user_1,@Param("user_2") int user_2);
+	void deleteFriend(@Param("user_1") int user_1,@Param("user_2") int user_2);
 }

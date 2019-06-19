@@ -38,23 +38,13 @@ public class FriendingServiceImpl implements FriendingService {
 	}
 
 	@Override
-	public Friending addFriend(int user_1, int user_2) {
-		Friending retFriend = friendingDao.addFriend(user_1, user_2);
-		if(Optional.of(retFriend).isPresent()) {
-			return retFriend;
-		} else {
-			return null;
-		}
+	public void addFriend(int user_1, int user_2) {
+		friendingDao.addFriend(user_1, user_2);
 	}
 
 	@Override
-	public Friending deleteFriend(int user_1, int user_2) {
-		Friending retFriend = friendingDao.deleteFriend(user_1, user_2);
-		if(Optional.of(retFriend).isPresent()) {
-			return retFriend;
-		} else {
-			return null;
-		}
+	public void deleteFriend(int user_1, int user_2) {
+		friendingDao.deleteFriend(user_1, user_2);
 	}
 
 }

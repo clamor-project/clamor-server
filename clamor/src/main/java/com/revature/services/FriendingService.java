@@ -10,8 +10,8 @@ public interface FriendingService {
 	Friending findById(int id);
 	
 	//to add friends and accept friends
-	Friending addFriend(int user_1, int user_2);
+	void addFriend(int user_1, int user_2);
 	
 	//deleting friends
-	Friending deleteFriend(int user_1, int user_2);
+	void deleteFriend(int user_1, int user_2);
 }
