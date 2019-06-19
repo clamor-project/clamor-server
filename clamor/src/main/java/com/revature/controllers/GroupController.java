@@ -154,10 +154,20 @@ public class GroupController {
 	
 	// POST: New Usergroup
 	@PostMapping("/join/{groupId}")
-	public void joinGroup(@RequestBody User user, @PathVariable int groupId) {
+	public boolean joinGroup(@RequestBody User user, @PathVariable int groupId) {
 		
-		//TODO: logic for handling if they left and want to come back
-		usergroupService.joinGroup(user.getId(), groupId, 2);
+		List<Usergroup> ugl = usergroupService.findByUserIdAndGroupId(user.getId(), groupId);
+		if (ugl.size() == 0) {
+			usergroupService.joinGroup(user.getId(), groupId, 2);
+			return true;
+		} else {
+			Usergroup ug = ugl.get(0);
+			if (ug.getRole().getId() != 3) {
+				usergroupService.updateUsergroupRole(user.getId(), groupId, 2);
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	// PATCH: Update usergroup set role to "4"
