@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.annotations.ProtectedRouteAnn;
 import com.revature.models.Event;
 import com.revature.models.Group;
 import com.revature.models.GroupMessage;
@@ -22,6 +21,7 @@ import com.revature.models.Usergroup;
 import com.revature.services.EventService;
 import com.revature.services.GroupMessageService;
 import com.revature.services.GroupService;
+import com.revature.services.UserService;
 import com.revature.services.UsergroupService;
 
 @RestController
@@ -32,18 +32,21 @@ public class GroupController {
 	private UsergroupService usergroupService;
 	private GroupMessageService groupMessageService;
 	private EventService eventService;
+	private UserService userService;
 
 	@Autowired
 	public GroupController(
 			GroupService groupService, 
 			UsergroupService usergroupService,
 			GroupMessageService groupMessageService,
-			EventService eventService) {
+			EventService eventService,
+			UserService userService) {
 		super();
 		this.groupService = groupService;
 		this.usergroupService = usergroupService;
 		this.groupMessageService = groupMessageService;
 		this.eventService = eventService;
+		this.userService = userService;
 	}
 	
 	// GET: All Groups
@@ -179,8 +182,14 @@ public class GroupController {
 	// PATCH: Update usergroup set role to "4"
 	// because nobody wanted them there anyway...
 	@PatchMapping("/leave/{groupId}")
-	public void leaveGroup(@RequestBody User user, @PathVariable int groupId) {
-		usergroupService.updateUsergroupRole(user.getId(), groupId, 4);
+	public boolean leaveGroup(@RequestBody User user, @PathVariable int groupId) {
+		
+		Usergroup ug = (usergroupService.findByUserIdAndGroupId(user.getId(), groupId)).get(0);
+		if (ug.getRole().getRoleName().equals("member")) {
+			usergroupService.updateUsergroupRole(user.getId(), groupId, 4);
+			return true;
+		}
+		return false;
 	}
 	
 	// GET: All events by Group ID
@@ -191,16 +200,37 @@ public class GroupController {
 	
 	// POST: New event
 	@PostMapping("/event/{groupId}")
-	public Event createEvent(@RequestBody Event event, @PathVariable int groupId) {
+	public boolean createEvent(@RequestBody Event event, @PathVariable int groupId) {
 		
 		Usergroup ug = (usergroupService.findByUserIdAndGroupId(event.getCreator().getId(), groupId)).get(0);
-		if (ug.getRole().getRoleName() == "member" || ug.getRole().getRoleName() == "admin") {
-			return eventService.createEvent(event.getCreator().getId(), groupId, event.getDescription(), event.getDatePosted(), event.getDateOf(), event.isLive());
+		if (ug.getRole().getRoleName().contentEquals("member") || ug.getRole().getRoleName().equals("organizer")) {
+			eventService.createEvent(event.getCreator().getId(), groupId, event.getDescription(), event.getDatePosted(), event.getDateOf(), event.isLive());
+			return true;
 		}
 		
-		// returning an empty object as "false" with the falsiest falses of Javascript's falsy false values
-		return new Event(-1, null, null, "", null, null, false);
+		return false;
 	}
 	
+	// PATCH: event
+	@PatchMapping("/event/{trustedId}")
+	public Event updateEvent(@RequestBody Event event, @PathVariable int trustedId) {
+		
+		User user = userService.findById(trustedId);
+		if (user.getId() != event.getCreator().getUser().getId()) {
+			return new Event(0, null, null, "", null, null, false);
+		}
+		return eventService.save(event);
+	}
 	
+	// DELETE: event
+	@DeleteMapping("/event/{eventId}")
+	public boolean deleteEvent(@RequestBody User user, @PathVariable int eventId) {
+		
+		Event event = eventService.findById(eventId);
+		if (event.getCreator().getUser().getId() != user.getId()) {
+			return false;
+		}
+		
+		return eventService.deleteById(eventId);
+	}
 }

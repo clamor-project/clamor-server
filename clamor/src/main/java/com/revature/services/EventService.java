@@ -12,5 +12,9 @@ public interface EventService {
 	
 	List<Event> findByGroupId(int groupId);
 	
-	Event createEvent(int usergroupId, int groupId, String description, Date datePosted, Date dateOf, boolean live);
+	void createEvent(int usergroupId, int groupId, String description, Date datePosted, Date dateOf, boolean live);
+	
+	Event save(Event event);
+	
+	boolean deleteById(int id);
 }
