@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,6 +34,16 @@ public class FriendingController {
 	@GetMapping("id/{id}")
 	public Friending findById(@PathVariable int id) {
 		return friendingService.findById(id);
+	}
+	
+	@PostMapping(path = "add", consumes = "application/json", produces = "application/json")
+	public Friending addFriends(@RequestBody int user_1, int user_2) {
+		return friendingService.addFriend(user_1, user_2);
+	}
+	
+	@PostMapping(path = "delete", consumes = "application/json", produces = "application/json")
+	public Friending deleteFriends(@RequestBody int user_1, int user_2) {
+		return friendingService.deleteFriend(user_1, user_2);
 	}
 	
 }

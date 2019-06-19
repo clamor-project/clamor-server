@@ -46,6 +46,12 @@ public class UserController {
 		return userService.getUserFriends(id);
 	}
 	
+	@GetMapping("friends/request/{id}")
+	public List<User> getFriendRequest(@PathVariable int id){
+		return userService.getFriendRequest(id);
+	}
+	
+	
 	@PostMapping("")
 	public User getUsernameAndPassword(@RequestBody String username, @RequestBody String password) {
 		return userService.getLogin(username, password);
@@ -63,4 +69,8 @@ public class UserController {
 		List<Usergroup> retList = usergroupService.findByUserId(id);
 		return Conversions.convertUsergroupPrivate(retList);
 	}
+	
+	
+	//make a register endpoint
 }
+

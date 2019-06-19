@@ -14,4 +14,6 @@ public interface UserService {
 	User getUser(String username);
 	
 	List<User> getUserFriends(int id);
+	
+	List<User> getFriendRequest(int id);
 }
