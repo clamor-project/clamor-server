@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.revature.exceptions.IncorrectRegistrationException;
 import com.revature.models.User;
 import com.revature.repositories.UserDao;
 
@@ -51,6 +52,17 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		return retUser;
+	}
+	
+	public User save(String username, String password, String email, Date dob) {
+			User userToSave = new User(0, username, password, email, dob);
+			List<User> existingUsers = userDao.findByUsernameOrEmail(username, email);
+			if(existingUsers.isEmpty()) {
+				return userDao.save(userToSave);
+			} else {
+				return userToSave;
+			}
+		
 	}
 
 	@Override
