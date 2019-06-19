@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,6 +41,22 @@ public class UserController {
 		return userService.findById(id);
 	}
 	
+	@GetMapping("friends/{id}")
+	public List<User> getUserFriends(@PathVariable int id){
+		return userService.getUserFriends(id);
+	}
+	
+	@PostMapping("")
+	public User getUsernameAndPassword(@RequestBody String username, @RequestBody String password) {
+		return userService.getLogin(username, password);
+		
+	}
+	
+	@PostMapping("user")
+	public User getUsername(@RequestBody String username) {
+		return userService.getUser(username);
+  }
+
 	// will eventually infer id based off of client data
 	@GetMapping("groups/{id}")
 	public List<UsergroupDTO> findGroupsByUserId(@PathVariable int id){

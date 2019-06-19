@@ -53,4 +53,32 @@ public class UserServiceImpl implements UserService {
 		return retUser;
 	}
 
+	@Override
+	public User getUser(String username) {
+		User retUser = userDao.findByUsername(username);
+		
+		//so Can still make it temporarily a optional just to check if it exists
+		if(Optional.of(retUser).isPresent()) { 
+			return retUser;
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public List<User> getUserFriends(int id) {
+		List<User> retUser = userDao.findUserFriends(id);
+		
+		for(int x = 0; x < retUser.size(); x++) {
+			if(Optional.of(retUser.get(x)).isPresent()) {
+				
+			} else {
+				retUser.remove(x);
+				retUser.add(x, new User(0, "", "", "", new Date()));
+			}
+		}
+		
+		return retUser;
+	}
+
 }

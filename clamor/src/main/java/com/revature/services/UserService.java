@@ -10,4 +10,8 @@ public interface UserService {
 	User findById(int id);
 	
 	User getLogin(String username, String password);
+	
+	User getUser(String username);
+	
+	List<User> getUserFriends(int id);
 }
