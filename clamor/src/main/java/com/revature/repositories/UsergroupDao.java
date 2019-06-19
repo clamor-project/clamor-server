@@ -20,12 +20,14 @@ public interface UsergroupDao extends JpaRepository<Usergroup, Integer> {
 	List<Usergroup> findByUserIdAndGroupId(int userId, int groupId);
 	
 	@Modifying
-	@Query(value = "INSERT INTO clamor.user_group (user_id, group_id, role) VALUES (:userId, :groupId, :role);", nativeQuery = true)
+	@Query(value = "INSERT INTO clamor.user_group (user_id, group_id, role) VALUES (:userId, :groupId, :role)", nativeQuery = true)
 	@Transactional
-	void joinGroup(@Param("userId") int userId, @Param("groupId") int groupId,@Param("role") int role);
+	void joinGroup(@Param("userId") int userId, @Param("groupId") int groupId, @Param("role") int role);
 	
 	@Modifying
-	@Query(value = "UDATE clamor.user_group SET role = :role WHERE user_id = :userId AND group_id = :groupId;", nativeQuery = true)
+	@Query(value = "UPDATE clamor.user_group SET role = :role WHERE user_id = :userId AND group_id = :groupId", nativeQuery = true)
 	@Transactional
-	void updateUsergroupRole(@Param("userId") int userId, @Param("groupId") int groupId, @Param("role") int role);
+	void updateUsergroupRole(@Param("role") int role, @Param("userId") int userId, @Param("groupId") int groupId);
+	
+	
 }

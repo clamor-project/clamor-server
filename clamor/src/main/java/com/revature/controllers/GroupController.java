@@ -179,8 +179,14 @@ public class GroupController {
 	// PATCH: Update usergroup set role to "4"
 	// because nobody wanted them there anyway...
 	@PatchMapping("/leave/{groupId}")
-	public void leaveGroup(@RequestBody User user, @PathVariable int groupId) {
-		usergroupService.updateUsergroupRole(user.getId(), groupId, 4);
+	public boolean leaveGroup(@RequestBody User user, @PathVariable int groupId) {
+		
+		Usergroup ug = (usergroupService.findByUserIdAndGroupId(user.getId(), groupId)).get(0);
+		if (ug.getRole().getRoleName() == "member") {
+			usergroupService.updateUsergroupRole(user.getId(), groupId, 4);
+			return true;
+		}
+		return false;
 	}
 	
 	// GET: All events by Group ID
@@ -202,5 +208,10 @@ public class GroupController {
 		return new Event(-1, null, null, "", null, null, false);
 	}
 	
-	
+//	// PATCH: event
+//	@PatchMapping("/event/{eventId}")
+//	public Event changeEvent(@RequestBody User user) {
+//		
+//		
+//	}
 }
