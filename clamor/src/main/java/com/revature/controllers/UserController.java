@@ -10,19 +10,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.dtos.Conversions;
+import com.revature.dtos.UsergroupDTO;
 import com.revature.models.User;
+import com.revature.models.Usergroup;
 import com.revature.services.UserService;
+import com.revature.services.UsergroupService;
 
 @RestController
 @RequestMapping("user")
 public class UserController {
 
 	private UserService userService;
+	private UsergroupService usergroupService;
 
 	@Autowired
-	public UserController(UserService userService) {
+	public UserController(UserService userService, UsergroupService usergroupService) {
 		super();
 		this.userService = userService;
+		this.usergroupService = usergroupService;
 	}
 	
 	@GetMapping
@@ -49,5 +55,12 @@ public class UserController {
 	@PostMapping("user")
 	public User getUsername(@RequestBody String username) {
 		return userService.getUser(username);
+  }
+
+	// will eventually infer id based off of client data
+	@GetMapping("groups/{id}")
+	public List<UsergroupDTO> findGroupsByUserId(@PathVariable int id){
+		List<Usergroup> retList = usergroupService.findByUserId(id);
+		return Conversions.convertUsergroupPrivate(retList);
 	}
 }

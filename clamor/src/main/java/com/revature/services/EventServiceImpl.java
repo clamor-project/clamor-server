@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,4 +38,15 @@ public class EventServiceImpl implements EventService {
 		}
 	}
 
+	@Override
+	public List<Event> findByGroupId(int groupId) {
+		return eventDao.findByGroupId(groupId);
+	}
+
+	@Override
+	public Event createEvent(int usergroupId, int groupId, String description, Date datePosted, Date dateOf,
+			boolean live) {
+
+		return eventDao.createEvent(usergroupId, groupId, description, datePosted, dateOf, live);
+	}
 }

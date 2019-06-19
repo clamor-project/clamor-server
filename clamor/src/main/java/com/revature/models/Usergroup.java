@@ -13,7 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity
+@Entity(name = "Usergroup")
 @Table(name = "user_group")
 public class Usergroup {
 
@@ -34,7 +34,7 @@ public class Usergroup {
 	private Role role;
 	
 	@Column(name = "joined_date", columnDefinition = "default now()")
-	private Date joinedDate;
+	private Date joinedDate = new Date();
 
 	public Usergroup() {
 		super();
