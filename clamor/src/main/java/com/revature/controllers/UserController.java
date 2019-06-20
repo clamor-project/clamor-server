@@ -53,6 +53,11 @@ public class UserController {
 		return userService.getFriendRequest(id);
 	}
 	
+	@GetMapping("friends/potendial/{id}")
+	public List<User> getPotentialFriends(@PathVariable int id) {
+		return userService.getPotentialFriends(id);
+	}
+	
 	
 	@PostMapping("")
 	public User getUsernameAndPassword(@RequestBody String username, @RequestBody String password) {
