@@ -39,7 +39,17 @@ public class FriendingServiceImpl implements FriendingService {
 
 	@Override
 	public void addFriend(int user_1, int user_2) {
-		friendingDao.addFriend(user_1, user_2);
+		List<Friending> findingRequest = friendingDao.findAll();
+		boolean flag = false;
+		for(int x = 0; x < findingRequest.size(); x++) {
+			if(findingRequest.get(x).getUser1().getId() == user_1 && findingRequest.get(x).getUser2().getId() == user_2) {
+				flag = true;
+			}
+		}
+		
+		if(!flag) {
+			friendingDao.addFriend(user_1, user_2);
+		}
 	}
 
 	@Override

@@ -22,7 +22,7 @@ public interface UserDao extends JpaRepository<User, Integer> {
 	@Query("FROM user AS u WHERE u.id IN (SELECT a.user1 FROM friending AS a LEFT JOIN friending AS b ON a.user1 = b.user2 WHERE a.user1 = b.user2 AND b.user1 = a.user2 AND a.user2.id = :id)")
 	public List<User> findUserFriends(@Param("id") int id);
 	
-	//see friend requests
+	//see friend requests gotten
 	@Query("FROM user AS u WHERE u.id IN (SELECT a.user1 FROM friending AS a LEFT JOIN friending AS b ON a.user1 = b.user2 WHERE a.user1 = b.user2 AND NOT b.user1 = a.user2 AND a.user2.id = :id)")
 	public List<User> findFriendRequests(@Param("id") int id);
 
