@@ -171,7 +171,7 @@ public class GroupController {
 		} else {
 			Usergroup ug = ugl.get(0);
 			if (ug.getRole().getId() != 3) {
-				usergroupService.updateUsergroupRole(user.getId(), groupId, 2);
+				usergroupService.updateUsergroupRole(2, user.getId(), groupId);
 				return true;
 			}
 		}
@@ -185,7 +185,7 @@ public class GroupController {
 		
 		Usergroup ug = (usergroupService.findByUserIdAndGroupId(user.getId(), groupId)).get(0);
 		if (ug.getRole().getRoleName().equals("member")) {
-			usergroupService.updateUsergroupRole(user.getId(), groupId, 4);
+			usergroupService.updateUsergroupRole(4, user.getId(), groupId);
 			return true;
 		}
 		return false;

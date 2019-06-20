@@ -19,5 +19,5 @@ public interface UsergroupService {
 	
 	void joinGroup(int userId, int groupId, int role);
 	
-	void updateUsergroupRole(int userId, int groupId, int role);
+	void updateUsergroupRole(int role, int userId, int groupId);
 }

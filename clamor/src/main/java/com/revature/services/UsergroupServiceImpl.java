@@ -64,8 +64,8 @@ public class UsergroupServiceImpl implements UsergroupService {
 	}
 
 	@Override
-	public void updateUsergroupRole(int userId, int groupId, int role) {
+	public void updateUsergroupRole(int role, int userId, int groupId) {
 
-		usergroupDao.updateUsergroupRole(userId, groupId, role);
+		usergroupDao.updateUsergroupRole(role, userId, groupId);
 	}
 }
