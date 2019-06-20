@@ -30,9 +30,9 @@ values (1, 'Welcome to the tictactoe group!'), (2, 'yes, please dont leave'), (3
 (21, 'im out, like bridge better'), (22, 'sorry too busy with sackhopping');
 
 insert into "event" (creator, group_id, description, date_of) values
-(2, 1, 'Our anual sudden death tic-tac-toe matchoff!', '2019-06-28'),
-(9, 2, 'finals in central city. Parking unavailable, please jog in.', '2019-07-01'),
-(16, 3, 'heats meetup online. Must bring your own virtual deck', '2019-06-15');
+(2, 1, 'Tic-Tac-Tomb', 'Our anual sudden death tic-tac-toe matchoff!', '2019-06-28'),
+(9, 2, 'Sack up', 'finals in central city. Parking unavailable, please jog in.', '2019-07-01'),
+(16, 3, 'Hearts online', 'hearts meetup online. Must bring your own virtual deck', '2019-06-15');
 
 insert into friending (user_1, user_2) values
 (1,5), (5,1), (2,6), (6,2), (10,11), (11,10),
