@@ -103,4 +103,10 @@ public class UserServiceImpl implements UserService {
 		return retUser;
 	}
 
+	@Override
+	public List<User> getPotentialFriends(int id) {
+		// TODO Auto-generated method stub
+		return userDao.findPotentialFriends(id);
+	}
+
 }
