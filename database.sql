@@ -67,7 +67,8 @@ create table "event"(
 create table friending(
 	id serial primary key,
 	user_1 int references "user" on delete cascade,
-	user_2 int references "user" on delete cascade
+	user_2 int references "user" on delete cascade,
+	unique (user_1, user_2)
 );
 
 create table direct_message(
