@@ -35,4 +35,9 @@ public interface FriendingDao extends JpaRepository<Friending, Integer> {
 	@Query(value = "SELECT * FROM clamor.friending WHERE user1.id = :id OR user2.id = :id EXCEPT (SELECT user2 AS user1, user1 AS user2 FROM friending WHERE user2.id = :id OR user1.id = :id)", nativeQuery = true)
 	public List<Friending> findFriendRequests(@Param("id") int id);
 	
+
+	List<Friending> findByUser1Id(int id);
+	
+	List<Friending> findByUser2Id(int id);
+
 }

@@ -216,7 +216,7 @@ public class GroupController {
 		
 		User user = userService.findById(trustedId);
 		if (user.getId() != event.getCreator().getUser().getId()) {
-			return new Event(0, null, null, "", null, null, false);
+			return null;
 		}
 		return eventService.save(event);
 	}

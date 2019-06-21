@@ -22,4 +22,5 @@ public interface FriendingService {
 	
 	//to find existing friend requests
 	public List<Friending> findFriendRequests( int id);
+
 }

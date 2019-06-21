@@ -57,6 +57,7 @@ create table "event"(
 	id serial primary key,
 	creator int references user_group on delete set null,
 	group_id int references "group" on delete cascade,
+	title text not null,
 	description text not null,
 	date_posted date default now(),
 	date_of date not null,
@@ -66,7 +67,8 @@ create table "event"(
 create table friending(
 	id serial primary key,
 	user_1 int references "user" on delete cascade,
-	user_2 int references "user" on delete cascade
+	user_2 int references "user" on delete cascade,
+	unique (user_1, user_2)
 );
 
 create table direct_message(

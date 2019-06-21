@@ -31,6 +31,9 @@ public class Event {
 	private Group groupId;
 	
 	@NotNull
+	private String title;
+	
+	@NotNull
 	private String description;
 
 	@Column(name = "date_posted", columnDefinition="default now()")
@@ -45,14 +48,16 @@ public class Event {
 
 	public Event() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public Event(int id, Usergroup creator, Group groupId, @NotNull String description, Date datePosted,
-			@NotNull Date dateOf, boolean live) {
+	public Event(int id, Usergroup creator, Group groupId, @NotNull String title, @NotNull String description,
+			Date datePosted, @NotNull Date dateOf, boolean live) {
 		super();
 		this.id = id;
 		this.creator = creator;
 		this.groupId = groupId;
+		this.title = title;
 		this.description = description;
 		this.datePosted = datePosted;
 		this.dateOf = dateOf;
@@ -81,6 +86,14 @@ public class Event {
 
 	public void setGroupId(Group groupId) {
 		this.groupId = groupId;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getDescription() {
@@ -117,8 +130,9 @@ public class Event {
 
 	@Override
 	public String toString() {
-		return "Event [id=" + id + ", creator=" + creator + ", groupId=" + groupId + ", description=" + description
-				+ ", datePosted=" + datePosted + ", dateOf=" + dateOf + ", live=" + live + "]";
+		return "Event [id=" + id + ", creator=" + creator + ", groupId=" + groupId + ", title=" + title
+				+ ", description=" + description + ", datePosted=" + datePosted + ", dateOf=" + dateOf + ", live="
+				+ live + "]";
 	}
 
 	@Override
@@ -132,6 +146,7 @@ public class Event {
 		result = prime * result + ((groupId == null) ? 0 : groupId.hashCode());
 		result = prime * result + id;
 		result = prime * result + (live ? 1231 : 1237);
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
 
@@ -172,6 +187,11 @@ public class Event {
 		if (id != other.id)
 			return false;
 		if (live != other.live)
+			return false;
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
 			return false;
 		return true;
 	}
