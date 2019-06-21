@@ -10,7 +10,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.models.Friending;
-import com.revature.models.User;
 
 public interface FriendingDao extends JpaRepository<Friending, Integer> {
 

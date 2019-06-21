@@ -16,5 +16,7 @@ public interface UserService {
 	
 	User getUser(String username);
 	
+	User updateUser(User user);
+	
 	List<User> getPotentialFriends(int id);
 }

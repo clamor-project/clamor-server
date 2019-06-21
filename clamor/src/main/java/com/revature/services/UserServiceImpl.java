@@ -7,7 +7,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.exceptions.IncorrectRegistrationException;
 import com.revature.models.User;
 import com.revature.repositories.UserDao;
 
@@ -79,8 +78,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> getPotentialFriends(int id) {
-		// TODO Auto-generated method stub
 		return userDao.findPotentialFriends(id);
+	}
+
+	@Override
+	public User updateUser(User user) {
+		return userDao.save(user);
 	}
 
 }
