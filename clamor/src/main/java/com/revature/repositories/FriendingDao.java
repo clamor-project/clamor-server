@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.models.Friending;
+import com.revature.models.User;
 
 public interface FriendingDao extends JpaRepository<Friending, Integer> {
 
@@ -25,7 +26,18 @@ public interface FriendingDao extends JpaRepository<Friending, Integer> {
 	@Transactional
 	void deleteFriend(@Param("user_1") int user_1,@Param("user_2") int user_2);
 	
+	//find existing friends
+	@Query(" FROM friending AS a LEFT JOIN friending AS b ON a.user1 = b.user2 WHERE a.user1 = b.user2 AND b.user1 = a.user2 AND a.user2.id = :id")
+	public List<Friending> findUserFriends(@Param("id") int id);
+		
+	//see friend requests gotten
+	@Modifying
+	@Query(value = "SELECT * FROM clamor.friending WHERE user1.id = :id OR user2.id = :id EXCEPT (SELECT user2 AS user1, user1 AS user2 FROM friending WHERE user2.id = :id OR user1.id = :id)", nativeQuery = true)
+	public List<Friending> findFriendRequests(@Param("id") int id);
+	
+
 	List<Friending> findByUser1Id(int id);
 	
 	List<Friending> findByUser2Id(int id);
+
 }

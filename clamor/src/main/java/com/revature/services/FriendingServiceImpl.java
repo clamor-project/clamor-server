@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.models.Friending;
+import com.revature.models.User;
 import com.revature.repositories.FriendingDao;
 
 @Service
@@ -40,7 +41,17 @@ public class FriendingServiceImpl implements FriendingService {
 
 	@Override
 	public void addFriend(int user_1, int user_2) {
-		friendingDao.addFriend(user_1, user_2);
+		List<Friending> findingRequest = friendingDao.findAll();
+		boolean flag = false;
+		for(int x = 0; x < findingRequest.size(); x++) {
+			if(findingRequest.get(x).getUser1().getId() == user_1 && findingRequest.get(x).getUser2().getId() == user_2) {
+				flag = true;
+			}
+		}
+		
+		if(!flag) {
+			friendingDao.addFriend(user_1, user_2);
+		}
 	}
 
 	@Override
@@ -49,16 +60,34 @@ public class FriendingServiceImpl implements FriendingService {
 	}
 
 	@Override
+	public List<Friending> findUserFriends(int id) {
+		List<Friending> retUser = friendingDao.findUserFriends(id);
+		
+		for(int x = 0; x < retUser.size(); x++) {
+			if(!Optional.of(retUser.get(x)).isPresent()) {
+				retUser.remove(x);
+			}
+		}
+		
+		return retUser;
+	}
+
 	public List<Friending> findFriendRequests(int id) {
 		
 		List<Friending> potential = friendingDao.findByUser2Id(id);
+		System.out.println(potential);
 		List<Friending> myFriending = friendingDao.findByUser1Id(id);
+		System.out.print(myFriending);
 		List<Friending> theList = new ArrayList<>();
 		for (Friending f : potential) {
+			boolean add = true;
 			for (Friending m : myFriending) {
-				if (f.getUser1() != m.getUser2() || f.getUser2() != m.getUser1()) {
-					theList.add(f);
+				if ((f.getUser1() == m.getUser2() && f.getUser2() == m.getUser1())) {
+					add = false;
 				}
+			}
+			if(add) {
+				theList.add(f);
 			}
 		}
 		return theList;

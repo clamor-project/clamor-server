@@ -2,6 +2,8 @@ package com.revature.services;
 
 import java.util.List;
 
+import org.springframework.data.repository.query.Param;
+
 import com.revature.models.Friending;
 
 public interface FriendingService {
@@ -15,5 +17,10 @@ public interface FriendingService {
 	//deleting friends
 	void deleteFriend(int user_1, int user_2);
 	
-	List<Friending> findFriendRequests(int id);
+	//to find existing friends
+	public List<Friending> findUserFriends(int id);
+	
+	//to find existing friend requests
+	public List<Friending> findFriendRequests( int id);
+
 }

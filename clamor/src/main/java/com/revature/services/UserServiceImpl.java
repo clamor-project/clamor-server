@@ -78,32 +78,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> getUserFriends(int id) {
-		List<User> retUser = userDao.findUserFriends(id);
-		
-		for(int x = 0; x < retUser.size(); x++) {
-			if(!Optional.of(retUser.get(x)).isPresent()) {
-				retUser.remove(x);
-			}
-		}
-		
-		return retUser;
-	}
-
-	@Override
-	public List<User> getFriendRequest(int id) {
-		List<User> retUser = userDao.findFriendRequests(id);
-		
-		for(int x = 0; x < retUser.size(); x++) {
-			if(!Optional.of(retUser.get(x)).isPresent()) {
-				retUser.remove(x);
-			}
-		}
-		
-		return retUser;
-	}
-
-	@Override
 	public List<User> getPotentialFriends(int id) {
 		// TODO Auto-generated method stub
 		return userDao.findPotentialFriends(id);
