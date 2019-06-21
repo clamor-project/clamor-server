@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.models.Friending;
+import com.revature.models.User;
 import com.revature.repositories.FriendingDao;
 
 @Service
@@ -55,6 +56,32 @@ public class FriendingServiceImpl implements FriendingService {
 	@Override
 	public void deleteFriend(int user_1, int user_2) {
 		friendingDao.deleteFriend(user_1, user_2);
+	}
+
+	@Override
+	public List<Friending> findUserFriends(int id) {
+		List<Friending> retUser = friendingDao.findUserFriends(id);
+		
+		for(int x = 0; x < retUser.size(); x++) {
+			if(!Optional.of(retUser.get(x)).isPresent()) {
+				retUser.remove(x);
+			}
+		}
+		
+		return retUser;
+	}
+
+	@Override
+	public List<Friending> findFriendRequests(int id) {
+		List<Friending> retUser = friendingDao.findFriendRequests(id);
+		
+		for(int x = 0; x < retUser.size(); x++) {
+			if(!Optional.of(retUser.get(x)).isPresent()) {
+				retUser.remove(x);
+			}
+		}
+		
+		return retUser;
 	}
 
 }

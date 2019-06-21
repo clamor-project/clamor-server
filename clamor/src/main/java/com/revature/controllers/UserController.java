@@ -43,16 +43,6 @@ public class UserController {
 		return userService.findById(id);
 	}
 	
-	@GetMapping("friends/{id}")
-	public List<User> getUserFriends(@PathVariable int id){
-		return userService.getUserFriends(id);
-	}
-	
-	@GetMapping("friends/request/{id}")
-	public List<User> getFriendRequest(@PathVariable int id){
-		return userService.getFriendRequest(id);
-	}
-	
 	@GetMapping("friends/potendial/{id}")
 	public List<User> getPotentialFriends(@PathVariable int id) {
 		return userService.getPotentialFriends(id);

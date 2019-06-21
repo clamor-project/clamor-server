@@ -37,6 +37,16 @@ public class FriendingController {
 		return friendingService.findById(id);
 	}
 	
+	@GetMapping("friends/{id}")
+	public List<Friending> getFriends(@PathVariable int id){
+		return friendingService.findUserFriends(id);
+	}
+	
+	@GetMapping("requests/{id}")
+	public List<Friending> getRequests(@PathVariable int id){
+		return friendingService.findFriendRequests(id);
+	}
+	
 	@PostMapping(path = "add", consumes = "application/json", produces = "application/json")
 	public void addFriends(@RequestBody Friending friending) {
 		friendingService.addFriend(friending.getUser1().getId(), friending.getUser2().getId());
@@ -48,3 +58,4 @@ public class FriendingController {
 	}
 	
 }
+ 
