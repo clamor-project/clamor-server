@@ -14,4 +14,6 @@ public interface FriendingService {
 	
 	//deleting friends
 	void deleteFriend(int user_1, int user_2);
+	
+	List<Friending> findFriendRequests(int id);
 }
