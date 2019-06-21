@@ -75,13 +75,19 @@ public class FriendingServiceImpl implements FriendingService {
 	public List<Friending> findFriendRequests(int id) {
 		
 		List<Friending> potential = friendingDao.findByUser2Id(id);
+		System.out.println(potential);
 		List<Friending> myFriending = friendingDao.findByUser1Id(id);
+		System.out.print(myFriending);
 		List<Friending> theList = new ArrayList<>();
 		for (Friending f : potential) {
+			boolean add = true;
 			for (Friending m : myFriending) {
-				if (f.getUser1() != m.getUser2() || f.getUser2() != m.getUser1()) {
-					theList.add(f);
+				if ((f.getUser1() == m.getUser2() && f.getUser2() == m.getUser1())) {
+					add = false;
 				}
+			}
+			if(add) {
+				theList.add(f);
 			}
 		}
 		return theList;
