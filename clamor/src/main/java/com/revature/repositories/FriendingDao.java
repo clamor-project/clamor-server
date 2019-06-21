@@ -1,6 +1,8 @@
 package com.revature.repositories;
 
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -22,4 +24,8 @@ public interface FriendingDao extends JpaRepository<Friending, Integer> {
 	@Query(value = "DELETE FROM clamor.friending AS f WHERE (f.user_1 = :user_1 AND f.user_2 = :user_2) OR (f.user_2 = :user_1 AND f.user_1 = :user_2)", nativeQuery = true)
 	@Transactional
 	void deleteFriend(@Param("user_1") int user_1,@Param("user_2") int user_2);
+	
+	List<Friending> findByUser1Id(int id);
+	
+	List<Friending> findByUser2Id(int id);
 }

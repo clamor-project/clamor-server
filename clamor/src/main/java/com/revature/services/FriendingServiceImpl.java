@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,4 +48,19 @@ public class FriendingServiceImpl implements FriendingService {
 		friendingDao.deleteFriend(user_1, user_2);
 	}
 
+	@Override
+	public List<Friending> findFriendRequests(int id) {
+		
+		List<Friending> potential = friendingDao.findByUser2Id(id);
+		List<Friending> myFriending = friendingDao.findByUser1Id(id);
+		List<Friending> theList = new ArrayList<>();
+		for (Friending f : potential) {
+			for (Friending m : myFriending) {
+				if (f.getUser1() != m.getUser2() || f.getUser2() != m.getUser1()) {
+					theList.add(f);
+				}
+			}
+		}
+		return theList;
+	}
 }
