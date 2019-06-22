@@ -49,7 +49,7 @@ create table user_group(
 create table group_message(
 	id serial primary key,
 	author int references user_group on delete cascade,
-	date_created date default now(),
+	date_created timestamp default now(),
 	"content" text not null
 );
 
@@ -59,8 +59,8 @@ create table "event"(
 	group_id int references "group" on delete cascade,
 	title text not null,
 	description text not null,
-	date_posted date default now(),
-	date_of date not null,
+	date_posted timestamp default now(),
+	date_of timestamp not null,
 	live boolean default true
 );
 
@@ -75,7 +75,7 @@ create table direct_message(
 	id serial primary key,
 	friends int references friending on delete cascade,
 	"content" text not null,
-	sent_date date default now()
+	sent_date timestamp default now()
 );
 
 create table invitation(

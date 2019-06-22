@@ -203,7 +203,7 @@ public class GroupController {
 		
 		Usergroup ug = (usergroupService.findByUserIdAndGroupId(event.getCreator().getId(), groupId)).get(0);
 		if (ug.getRole().getRoleName().contentEquals("member") || ug.getRole().getRoleName().equals("organizer")) {
-			eventService.createEvent(event.getCreator().getId(), groupId, event.getDescription(), event.getDatePosted(), event.getDateOf(), event.isLive());
+			eventService.createEvent(event.getCreator().getId(), groupId, event.getTitle(), event.getDescription(), event.getDatePosted(), event.getDateOf(), event.isLive());
 			return true;
 		}
 		
