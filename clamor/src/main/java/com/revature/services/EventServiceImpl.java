@@ -44,10 +44,10 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public void createEvent(int usergroupId, int groupId, String description, Date datePosted, Date dateOf,
+	public void createEvent(int usergroupId, int groupId, String title, String description, Date datePosted, Date dateOf,
 			boolean live) {
 
-		eventDao.createEvent(usergroupId, groupId, description, datePosted, dateOf, live);
+		eventDao.createEvent(usergroupId, groupId, title, description, datePosted, dateOf, live);
 	}
 	
 	@Override
