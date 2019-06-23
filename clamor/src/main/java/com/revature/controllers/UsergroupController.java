@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,5 +34,15 @@ public class UsergroupController {
 	@GetMapping("id/{id}")
 	public Usergroup findById(@PathVariable int id) {
 		return usergroupService.findById(id);
+	}
+	
+	@PatchMapping("role/{roleId}")
+	public boolean updateUsergroupRole(@RequestBody Usergroup usergroup, @PathVariable int roleId) {
+		try {
+			usergroupService.updateUsergroupRole(roleId, usergroup.getUser().getId(), usergroup.getGroup().getId());
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 }
