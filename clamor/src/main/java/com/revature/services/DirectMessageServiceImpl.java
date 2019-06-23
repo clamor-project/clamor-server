@@ -55,4 +55,9 @@ public class DirectMessageServiceImpl implements DirectMessageService {
 		
 		return true;
 	}
+
+	@Override
+	public List<DirectMessage> findByConversation(int id1, int id2) {
+		return directMessageDao.findByConversation(id1, id2);
+	}
 }
