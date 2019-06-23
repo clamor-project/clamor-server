@@ -9,6 +9,6 @@ import com.revature.models.GroupMessage;
 
 public interface GroupMessageDao extends JpaRepository<GroupMessage, Integer> {
 
-	@Query("FROM GroupMessage AS gm INNER JOIN Usergroup AS ug ON gm.author = ug.id INNER JOIN Group AS g ON ug.group = g.id WHERE g.id = :groupId ORDER BY gm.dateCreated")
+	@Query("FROM GroupMessage AS gm INNER JOIN Usergroup AS ug ON gm.author = ug.id INNER JOIN Group AS g ON ug.group = g.id WHERE g.id = :groupId ORDER BY gm.dateCreated DESC")
 	List<GroupMessage> findByGroupId(int groupId);
 }
