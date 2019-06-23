@@ -124,7 +124,7 @@ public class GroupController {
 	
 	// GET: All group messages from Group id {id}
 	@GetMapping("/messages/{groupId}")
-	public List<GroupMessage> getGroupMessages(int groupId) {
+	public List<GroupMessage> getGroupMessages(@PathVariable int groupId) {
 		return groupMessageService.findByGroupId(groupId);
 	}
 	
