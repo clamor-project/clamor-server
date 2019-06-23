@@ -14,4 +14,6 @@ public interface DirectMessageService {
 	DirectMessage save(DirectMessage directMessage);
 	
 	boolean deleteById(int id);
+	
+	List<DirectMessage> findByConversation(int id1, int id2);
 }
