@@ -44,7 +44,7 @@ public class UsergroupServiceImpl implements UsergroupService {
 	
 	@Override
 	public List<Usergroup> findByGroupId(int groupId) {
-		return usergroupDao.findByGroupId(groupId);
+		return usergroupDao.findByGroupIdOrderById(groupId);
 	}
 	
 	@Override
