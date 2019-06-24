@@ -13,7 +13,7 @@ import com.revature.models.Usergroup;
 
 public interface UsergroupDao extends JpaRepository<Usergroup, Integer> {
 
-	List<Usergroup> findByGroupId(int groupId);
+	List<Usergroup> findByGroupIdOrderById(int groupId);
 	
 	List<Usergroup> findByUserId(int userId);
 	
